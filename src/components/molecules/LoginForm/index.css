@@ -40,7 +40,7 @@
  width: 25em;
 }
 
-.container-button {
+.containerButtonLogin {
  display: flex;
  justify-content: flex-end;
  align-items: center;
@@ -48,4 +48,10 @@
  margin-top: 5px;
  gap: 10px;
  margin-right: 100px;
+}
+
+.containerButtonLogin button:hover {
+ background-color: white;
+ color: #1976d2;
+ font-weight: bold;
 }
