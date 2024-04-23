@@ -1,12 +1,11 @@
-import LoginPage from "./pages/LoginPage/LoginPage"
+import { Outlet } from "react-router-dom";
 
 function App() {
-
-  return (
-    <>
-     <LoginPage />
-    </>
-  )
+ return (
+  <>
+   <Outlet />
+  </>
+ );
 }
 
-export default App
+export default App;

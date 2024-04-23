@@ -1,0 +1,82 @@
+.container-cadastro {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ height: 100vh;
+ width: 100vw;
+ background-color: #e5e5e5;
+}
+
+.logoCadastro {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.logoCadastro img {
+ width: 150px;
+ height: 150px;
+}
+
+.cadastro-form {
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+}
+
+.cadastro-form form {
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+ height: 700px;
+ width: 700px;
+ gap: 10px;
+ background-color: white;
+ border-radius: 15px;
+}
+
+.dadosPessoais {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ gap: 15px;
+ width: 100%;
+}
+
+.dadosPessoais input {
+ width: 600px;
+ height: 1px;
+ padding-left: 10px;
+}
+
+.dadosEndereco {
+ display: grid;
+ grid-template-columns: 1fr 2fr;
+ grid-template-rows: 0fr 0fr;
+ gap: 15px;
+ width: 100%;
+ height: 100%;
+ padding: 7px 10px;
+ margin-right: 50px;
+}
+
+.dadosEndereco input {
+ width: 600px;
+ height: 1px;
+}
+
+.containerButtonCadastro {
+ display: flex;
+ justify-content: flex-end;
+ align-items: center;
+}
+
+.containerButtonCadastro button:hover {
+ background-color: white;
+ color: #1976d2;
+ font-weight: bold;
+}

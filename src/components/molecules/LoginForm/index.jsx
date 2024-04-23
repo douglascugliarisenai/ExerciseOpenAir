@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import { TextField, Button } from "@mui/material";
 import "./index.css";
+import { Link } from "react-router-dom";
 function LoginForm() {
  return (
   <>
@@ -26,10 +27,12 @@ function LoginForm() {
       autoComplete="current-password"
      />
 
-     <Grid className="container-button">
-      <Button className="button-register" variant="contained" size="medium">
-       Registre-se
-      </Button>
+     <Grid className="containerButtonLogin">
+      <Link to="/cadastro">
+       <Button className="button-register" variant="contained" size="medium">
+        Registre-se
+       </Button>
+      </Link>
       <Button className="button-login" variant="contained" size="medium">
        Login
       </Button>
