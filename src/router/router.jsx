@@ -4,6 +4,7 @@ import App from "../App";
 import LoginPage from "../pages/LoginPage/LoginPage";
 import CadastroPage from "../pages/CadastroPage/CadastroPage";
 import ErroPage from "../pages/ErroPage/ErroPage";
+import DashboardPage from "../pages/DashboardPage/DashboardPage";
 
 const routers = createBrowserRouter([
  {
@@ -14,6 +15,10 @@ const routers = createBrowserRouter([
    {
     path: "/",
     element: <LoginPage />
+   },
+   {
+    path: "/dashboard",
+    element: <DashboardPage />
    },
    {
     path: "/cadastro",
