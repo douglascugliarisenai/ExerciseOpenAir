@@ -168,7 +168,7 @@ function CadastroForm() {
         placeholder="Logradouro"
         error={!!errors.logradouro}
         helperText={errors.logradouro?.message}
-        {...register("cep", setValue("logradouro", cep.logradouro), {
+        {...register("logradouro", setValue("logradouro", cep.logradouro), {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 30,
