@@ -28,46 +28,88 @@
 
 .cadastro-form form {
  display: flex;
- justify-content: center;
  flex-direction: column;
  align-items: center;
- height: 800px;
+ height: 600px;
  width: 700px;
- gap: 10px;
+ gap: 30px;
  background-color: white;
  border-radius: 15px;
 }
 
-.dadosPessoais {
+.cadastro-form img {
+ width: 100px;
+ height: 100px;
+ margin-top: 30px;
+}
+
+.gridNome {
  display: flex;
  justify-content: center;
  align-items: center;
  flex-direction: column;
- gap: 15px;
+ gap: 30px 30px;
+ width: 42rem;
+}
+
+.gridNome div {
+ display: flex;
+ justify-content: center;
+ align-items: center;
  width: 100%;
+ height: 2rem;
 }
 
-.dadosPessoais input {
+.gridNome input {
  display: flex;
  justify-content: center;
  align-items: center;
- width: 38rem;
- height: 10px;
+ width: 100%;
+ height: 0;
 }
 
-.dadosPessoais label {
+.dadosComplementares {
+ display: grid;
+ justify-content: center;
+ align-items: center;
+ grid-template-columns: 1fr 1fr;
+ grid-template-rows: 1fr 1fr;
+ gap: 30px 30px;
+ width: 42rem;
+}
+
+.dadosComplementares div {
  display: flex;
  justify-content: center;
  align-items: center;
+ width: 100%;
+ height: 2rem;
+}
+
+.dadosComplementares input {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ width: 100%;
+ height: 0;
 }
 
 .dadosEndereco {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ justify-content: center;
+ align-items: center;
+ gap: 30px 30px;
+ width: 10rem;
+ height: 2rem;
+}
+
+.dadosEndereco div {
  display: flex;
  justify-content: center;
  align-items: center;
- flex-wrap: wrap;
- gap: 10px 10px;
- width: 100%;
+ width: 20rem;
+ height: 2rem;
 }
 
 .dadosEndereco input {
@@ -76,18 +118,44 @@
  align-items: center;
  flex-direction: column;
  width: 30rem;
- height: 10px;
+ height: 2rem;
 }
 
 .containerButtonCadastro {
  display: flex;
- justify-content: flex-end;
- align-items: center;
+ height: 100px;
+ flex-direction: column;
+ margin-top: 30px;
+ gap: 20px;
 }
 
-.containerButtonCadastro button:hover {
+.containerButtonCadastro a {
+ text-decoration: none;
+}
+
+.containerButtonCadastro button {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ height: 30px;
+}
+
+.containerButtonCadastro .buttonVoltar {
  background-color: white;
  color: #1976d2;
+ font-weight: bold;
+}
+
+.containerButtonCadastro .buttonCadastrar:hover {
+ background-color: white;
+ color: #1976d2;
+ font-weight: bold;
+}
+
+.containerButtonCadastro .buttonVoltar:hover {
+ background-color: #1976d2;
+ color: white;
  font-weight: bold;
 }
 

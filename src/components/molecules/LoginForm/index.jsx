@@ -73,13 +73,13 @@ function LoginForm() {
      </form>
      <Grid className="containerButtonLogin">
       <Link to="/cadastro">
-       <Button className="button-register" variant="contained" size="medium">
+       <Button className="buttonRegister" variant="contained" size="medium">
         Registre-se
        </Button>
       </Link>
       <Button
        onClick={handleSubmit(sendLogin)}
-       className="button-login"
+       className="buttonLogin"
        variant="contained"
        size="medium">
        Login

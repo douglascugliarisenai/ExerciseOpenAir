@@ -1,11 +1,11 @@
 /* eslint-disable */
 import { createContext, useState, useEffect } from "react";
-import getJson from "../hooks/getJson";
+import useUsuarios from "../hooks/useUsuarios";
 
 export const UsuariosContext = createContext();
 export const UsuariosContextProvider = ({ children }) => {
- const [dados, isLoading] = getJson("/data/usuarios.json");
- const [usuarios, setUsuario] = useState(null);
+ const [dados, isLoading] = useUsuarios("/data/usuarios.json");
+ const [usuarios, setUsuario] = useState([]);
 
  function login(dadosUsuario) {
   for (let usuario of usuarios) {
@@ -19,6 +19,12 @@ export const UsuariosContextProvider = ({ children }) => {
   return false;
  }
 
+ function addUsuario(dadosUsuario) {
+  setUsuario((u) => [...u, dadosUsuario]);
+  console.log(dadosUsuario);
+  console.log(usuarios);
+ }
+
  useEffect(() => {
   console.log(dados);
   if (!!dados && !isLoading) {
@@ -27,7 +33,8 @@ export const UsuariosContextProvider = ({ children }) => {
  }, [dados]);
 
  return (
-  <UsuariosContext.Provider value={{ usuarios, setUsuario, isLoading, login }}>
+  <UsuariosContext.Provider
+   value={{ usuarios, setUsuario, isLoading, login, addUsuario }}>
    {children}
   </UsuariosContext.Provider>
  );
