@@ -1,36 +1,61 @@
 import { Select, TextField, MenuItem, Grid, Button } from "@mui/material";
-import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
 import "./index.css";
-import { Link } from "react-router-dom";
-import * as PropTypes from "prop-types";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useContext } from "react";
+import { UsuariosContext } from "../../../context/UsuarioContext";
+// import * as PropTypes from "prop-types";
 function CadastroForm() {
  const {
   register,
   handleSubmit,
+  watch,
+  setValue,
   formState: { errors }
  } = useForm();
 
+ const { addUsuario } = useContext(UsuariosContext);
+ const [cep, setCep] = useState("");
+ const navigate = useNavigate();
+
  function sendCadastro(formValue) {
-  console.log(formValue);
+  addUsuario(formValue);
+  navigate("/");
  }
+
+ const consultaCep = (event) => {
+  console.log(watch("cep"));
+
+  if (event.key === "Enter" || event.key === "Tab") {
+   event.preventDefault();
+   fetch(`https://viacep.com.br/ws/${watch("cep")}/json/`)
+    .then((response) => response.json())
+    .then((data) => {
+     setCep(data);
+    })
+    .catch((error) => {
+     console.error("Erro:", error);
+    });
+  }
+ };
 
  return (
   <>
    <Grid className="container-cadastro">
-    <Grid className="cadastro-form">
+    <Grid className="cadastro-form" sx={{ flexDirection: "column" }}>
      <form>
       <Grid className="logoCadastro">
        <img src="/assets/logo-exercita365.png" alt="Logo Exercita365" />
       </Grid>
-      <Grid className="dadosPessoais" sx={{ flexDirection: "column" }}>
+      <Grid className="gridNome" sx={{ flexDirection: "column" }}>
        <TextField
         type="text"
-        label="Nome"
         variant="outlined"
         placeholder="Nome"
         error={!!errors.nome}
         helperText={errors.nome?.message}
+        sx={{ height: "1rem" }}
         {...register("nome", {
          required: "Este campo é obrigatório.",
          maxLength: {
@@ -39,20 +64,19 @@ function CadastroForm() {
          }
         })}
        />
-
+      </Grid>
+      <Grid className="dadosComplementares">
        <Select
         error={!!errors.sexo}
         helperText={errors.sexo?.message}
-        sx={{ width: "40rem", height: "40px" }}
         {...register("sexo", { required: true })}>
         <MenuItem value="Masculino">Masculino</MenuItem>
         <MenuItem value="Feminino">Feminino</MenuItem>
        </Select>
 
-       <InputMask
-        mask="999.999.999-99"
-        disabled={false}
-        maskChar=" "
+       <TextField
+        placeholder="CPF"
+        variant="outlined"
         error={!!errors.cpf}
         helperText={errors.cpf?.message}
         {...register("cpf", {
@@ -61,36 +85,27 @@ function CadastroForm() {
           value: 11,
           message: "Este campo aceita no máximo 11 caracteres."
          }
-        })}>
-        {() => <TextField label="CPF" variant="outlined" placeholder="CPF" />}
-       </InputMask>
+        })}
+       />
 
-       <InputMask
-        mask="99/99/9999"
-        disabled={false}
-        maskChar=" "
+       <TextField
+        placeholder="Data de Nascimento"
+        type="date"
+        variant="outlined"
         error={!!errors.nascimento}
         helperText={errors.nascimento?.message}
         {...register("nascimento", {
          required: "Este campo é obrigatório.",
          maxLength: {
-          value: 8,
+          value: 10,
           message: "Este campo aceita no máximo 8 caracteres."
          }
-        })}>
-        {() => (
-         <TextField
-          label="Data Nasc."
-          variant="outlined"
-          placeholder="Data de Nascimento"
-         />
-        )}
-       </InputMask>
+        })}
+       />
 
        <TextField
-        type="text"
+        type="email"
         placeholder="E-mail"
-        label="E-mail"
         variant="outlined"
         error={!!errors.email}
         helperText={errors.email?.message}
@@ -102,9 +117,7 @@ function CadastroForm() {
          }
         })}
        />
-
        <TextField
-        label="Senha"
         type="password"
         autoComplete="current-password"
         placeholder="Senha"
@@ -113,48 +126,52 @@ function CadastroForm() {
         {...register("senha", {
          required: "Este campo é obrigatório.",
          maxLength: {
-          value: 60,
-          message: "Este campo aceita no máximo 60 caracteres."
+          value: 20,
+          message: "Este campo aceita no máximo 20 caracteres."
          }
+        })}
+       />
+
+       <TextField
+        type="password"
+        autoComplete="current-password"
+        placeholder="Confirma Senha"
+        error={!!errors.confirmaSenha}
+        helperText={errors.confirmaSenha?.message}
+        {...register("confirmaSenha", {
+         required: "Confirme a senha.",
+         validate: (value) =>
+          value === watch("senha") || "As senhas não coincidem"
         })}
        />
       </Grid>
 
       <Grid className="dadosEndereco">
-       <InputMask
-        mask="99999-999"
-        disabled={false}
-        maskChar=" "
+       <TextField
+        placeholder="CEP"
+        variant="outlined"
         error={!!errors.cep}
         helperText={errors.cep?.message}
+        onKeyDown={consultaCep}
         {...register("cep", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 8,
           message: "Este campo aceita no máximo 8 caracteres."
          }
-        })}>
-        {() => (
-         <TextField
-          placeholder="CEP"
-          label="CEP"
-          variant="outlined"
-          sx={{ width: "120px" }}
-         />
-        )}
-       </InputMask>
+        })}
+       />
 
        <TextField
         type="text"
-        label="Logradouro"
         variant="outlined"
         placeholder="Logradouro"
         error={!!errors.logradouro}
         helperText={errors.logradouro?.message}
-        {...register("logradouro", {
+        {...register("cep", setValue("logradouro", cep.logradouro), {
          required: "Este campo é obrigatório.",
          maxLength: {
-          value: 100,
+          value: 30,
           message: "Este campo aceita no máximo 100 caracteres."
          }
         })}
@@ -162,29 +179,26 @@ function CadastroForm() {
 
        <TextField
         type="text"
-        label="Município"
         variant="outlined"
         placeholder="Município"
         error={!!errors.municipio}
         helperText={errors.municipio?.message}
-        {...register("municipio", {
+        {...register("municipio", setValue("municipio", cep.localidade), {
          required: "Este campo é obrigatório.",
          maxLength: {
-          value: 60,
-          message: "Este campo aceita no máximo 60 caracteres."
+          value: 30,
+          message: "Este campo aceita no máximo 30 caracteres."
          }
         })}
        />
 
        <TextField
-        sx={{ width: "120px" }}
         type="text"
-        label="Estado"
         variant="outlined"
         placeholder="Estado"
         error={!!errors.estado}
         helperText={errors.estado?.message}
-        {...register("estado", {
+        {...register("estado", setValue("estado", cep.uf), {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 2,
@@ -194,9 +208,7 @@ function CadastroForm() {
        />
 
        <TextField
-        sx={{ width: "120px" }}
         type="text"
-        label="Número"
         variant="outlined"
         placeholder="Número"
         error={!!errors.numero}
@@ -212,11 +224,10 @@ function CadastroForm() {
 
        <TextField
         type="text"
-        label="Complemento"
         variant="outlined"
         placeholder="Complemento"
-        error={!!errors.municipio}
-        helperText={errors.municipio?.message}
+        error={!!errors.complemento}
+        helperText={errors.complemento?.message}
         {...register("complemento", {
          maxLength: {
           value: 100,
@@ -225,43 +236,42 @@ function CadastroForm() {
         })}
        />
       </Grid>
-      <Grid
-       className="containerButtonCadastro"
-       sx={{ marginTop: "20px", gap: "10px" }}>
-       <Link to="/">
-        <Button className="buttonVoltar" variant="contained" size="medium">
-         Voltar
-        </Button>
-       </Link>
-       <Button
-        onClick={handleSubmit(sendCadastro)}
-        className="buttonCadastrar"
-        variant="contained"
-        size="medium">
-        Cadastrar
-       </Button>
-      </Grid>
      </form>
+
+     <Grid className="containerButtonCadastro" sx={{ flexDirection: "column" }}>
+      <Button
+       onClick={handleSubmit(sendCadastro)}
+       className="buttonCadastrar"
+       variant="contained"
+       size="medium">
+       Cadastrar
+      </Button>
+      <Link to="/">
+       <Button className="buttonVoltar" variant="contained" size="medium">
+        Já Possui Cadastro?
+       </Button>
+      </Link>
+     </Grid>
     </Grid>
    </Grid>
   </>
  );
 }
 
-CadastroForm.PropTypes = {
- dadosUsuario: PropTypes.exact({
-  nome: PropTypes.string.isRequired,
-  sexo: PropTypes.oneOf(["masculino", "feminino"]), //Enum do PropTypes
-  cpf: PropTypes.string.isRequired,
-  nascimento: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  senha: PropTypes.string.isRequired,
-  cep: PropTypes.string.isRequired,
-  logradouro: PropTypes.string.isRequired,
-  numero: PropTypes.number.isRequired,
-  municipio: PropTypes.string.isRequired,
-  estado: PropTypes.string.isRequired
- })
-};
+// CadastroForm.PropTypes = {
+//  dadosUsuario: PropTypes.exact({
+//   nome: PropTypes.string.isRequired,
+//   sexo: PropTypes.oneOf(["masculino", "feminino"]), //Enum do PropTypes
+//   cpf: PropTypes.string.isRequired,
+//   nascimento: PropTypes.string.isRequired,
+//   email: PropTypes.string.isRequired,
+//   senha: PropTypes.string.isRequired,
+//   cep: PropTypes.string.isRequired,
+//   logradouro: PropTypes.string.isRequired,
+//   numero: PropTypes.number.isRequired,
+//   municipio: PropTypes.string.isRequired,
+//   estado: PropTypes.string.isRequired
+//  })
+// };
 
 export default CadastroForm;

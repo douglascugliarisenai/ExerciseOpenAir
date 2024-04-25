@@ -58,7 +58,25 @@
  margin-right: 100px;
 }
 
-.containerButtonLogin button:hover {
+.containerButtonLogin .buttonLogin {
+ background-color: #1976d2;
+ color: white;
+ font-weight: bold;
+}
+
+.containerButtonLogin .buttonRegister {
+ background-color: white;
+ color: #1976d2;
+ font-weight: bold;
+}
+
+.containerButtonLogin .buttonRegister:hover {
+ background-color: #1976d2;
+ color: white;
+ font-weight: bold;
+}
+
+.containerButtonLogin .buttonLogin:hover {
  background-color: white;
  color: #1976d2;
  font-weight: bold;
