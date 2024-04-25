@@ -3,7 +3,7 @@
         {
             "nome": "Douglas Filipe Moreira",
             "sexo": "Masculino",
-            "cpf": "387.343.159-93",
+            "cpf": "38734315993",
             "data_nasc": "25/01/1986",
             "email": "douglasfm@teste.com.br",
             "senha": "teste123",
@@ -17,7 +17,7 @@
         {
             "nome": "Rodrigo Fernando Jesus",
             "sexo": "Masculino",
-            "cpf": "387.343.159-93",
+            "cpf": "38734315993",
             "data_nasc": "15/04/1958",
             "email": "rodrigo.fernando.jesus@microlasersp.com.br",
             "senha": "2DmQpM7IJz",
@@ -31,7 +31,7 @@
         {
             "nome": "Jorge Felipe Lopes",
             "sexo": "Masculino",
-            "cpf": "904.620.185-63",
+            "cpf": "90462018563",
             "data_nasc": "12/01/1979",
             "email": "jorge-lopes83@simoesmendonca.adv.br",
             "senha": "zcRUaO76BP",
@@ -45,7 +45,7 @@
         {
             "nome": "Manoel Leonardo Costa",
             "sexo": "Masculino",
-            "cpf": "868.908.534-31",
+            "cpf": "86890853431",
             "data_nasc": "14/01/1951",
             "email": "manoel-costa82@oticascarol.com.br",
             "senha": "RRydyqzigr",
@@ -59,7 +59,7 @@
         {
             "nome": "Sebastiana Isabelle Caldeira",
             "sexo": "Feminino",
-            "cpf": "034.860.780-62",
+            "cpf": "03486078062",
             "data_nasc": "19/01/1989",
             "email": "sebastiana-caldeira98@impactatp.com.br",
             "senha": "08JzXeeIb9",
@@ -73,7 +73,7 @@
         {
             "nome": "Cecília Alessandra Vera Rezende",
             "sexo": "Feminino",
-            "cpf": "821.859.257-17",
+            "cpf": "82185925717",
             "data_nasc": "10/04/1974",
             "email": "cecilia_rezende@mirafactoring.com.br",
             "senha": "m1SdnTBH96",

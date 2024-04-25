@@ -34,42 +34,40 @@ function LoginForm() {
       <Grid className="logo">
        <img src="/assets/logo-exercita365.png" alt="Logo Exercita365" />
       </Grid>
-      <TextField
-       sx={{ marginBottom: "20px", width: "25em" }}
-       className="email"
-       id="outlined-basic"
-       label="Email"
-       type="email"
-       variant="outlined"
-       name="email"
-       error={!!errors.email}
-       helperText={errors.email?.message}
-       {...register("email", {
-        required: "Este campo é obrigatório.",
-        maxLength: {
-         value: 100,
-         message: "Este campo aceita no máximo 100 caracteres."
-        }
-       })}
-      />
-      <TextField
-       sx={{ marginBottom: "20px", width: "25em" }}
-       className="password"
-       id="outlined-password-input"
-       label="Senha"
-       type="password"
-       autoComplete="current-password"
-       name="senha"
-       error={!!errors.senha}
-       helperText={errors.senha?.message}
-       {...register("senha", {
-        required: "Este campo é obrigatório.",
-        maxLength: {
-         value: 100,
-         message: "Este campo aceita no máximo 100 caracteres."
-        }
-       })}
-      />
+      <Grid className="camposEntrada" sx={{ flexDirection: "column" }}>
+       <TextField
+        className="email"
+        id="outlined-basic"
+        type="email"
+        variant="outlined"
+        name="email"
+        error={!!errors.email}
+        helperText={errors.email?.message}
+        {...register("email", {
+         required: "Este campo é obrigatório.",
+         maxLength: {
+          value: 100,
+          message: "Este campo aceita no máximo 100 caracteres."
+         }
+        })}
+       />
+       <TextField
+        className="password"
+        id="outlined-password-input"
+        type="password"
+        autoComplete="current-password"
+        name="senha"
+        error={!!errors.senha}
+        helperText={errors.senha?.message}
+        {...register("senha", {
+         required: "Este campo é obrigatório.",
+         maxLength: {
+          value: 100,
+          message: "Este campo aceita no máximo 100 caracteres."
+         }
+        })}
+       />
+      </Grid>
      </form>
      <Grid className="containerButtonLogin">
       <Link to="/cadastro">
