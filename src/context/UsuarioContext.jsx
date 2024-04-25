@@ -21,12 +21,9 @@ export const UsuariosContextProvider = ({ children }) => {
 
  function addUsuario(dadosUsuario) {
   setUsuario((u) => [...u, dadosUsuario]);
-  console.log(dadosUsuario);
-  console.log(usuarios);
  }
 
  useEffect(() => {
-  console.log(dados);
   if (!!dados && !isLoading) {
    setUsuario(dados.usuarios);
   }

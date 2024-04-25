@@ -15,13 +15,26 @@ function CadastroForm() {
   formState: { errors }
  } = useForm();
 
- const { addUsuario } = useContext(UsuariosContext);
+ const { addUsuario, usuarios } = useContext(UsuariosContext);
  const [cep, setCep] = useState("");
  const navigate = useNavigate();
 
  function sendCadastro(formValue) {
-  addUsuario(formValue);
-  navigate("/");
+  usuarios.map((usuario) => {
+   if (usuario.cpf == formValue.cpf) {
+    console.log("CPF ja cadastrado");
+   } else {
+    addUsuario({ ...formValue, cpf: formValue.cpf.replace(/\D/g, "") });
+    // navigate("/");
+   }
+  });
+
+  if (usuarios.includes(formValue.cpf)) {
+   alert("CPF ja cadastrado");
+  } else {
+   addUsuario({ ...formValue, cpf: formValue.cpf.replace(/\D/g, "") });
+   navigate("/");
+  }
  }
 
  const consultaCep = (event) => {
@@ -237,7 +250,6 @@ function CadastroForm() {
        />
       </Grid>
      </form>
-
      <Grid className="containerButtonCadastro" sx={{ flexDirection: "column" }}>
       <Button
        onClick={handleSubmit(sendCadastro)}
