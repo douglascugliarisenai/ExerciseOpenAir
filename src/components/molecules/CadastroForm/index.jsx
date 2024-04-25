@@ -237,6 +237,7 @@ function CadastroForm() {
        />
       </Grid>
      </form>
+
      <Grid className="containerButtonCadastro" sx={{ flexDirection: "column" }}>
       <Button
        onClick={handleSubmit(sendCadastro)}
