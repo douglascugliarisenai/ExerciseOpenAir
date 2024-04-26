@@ -106,5 +106,26 @@
       "numero": "1516",
       "complemento": ""
     }
+  ],
+  "locais": [
+    {
+      "id": "1b54",
+      "nome": "Douglas",
+      "descricao": "Avenida Principal de Florianópolis",
+      "cep": "88111120",
+      "logradouro": "Rua Pedro Bunn",
+      "municipio": "São José",
+      "estado": "SC",
+      "latitude": "0",
+      "longitude": "0",
+      "usuario": "satdoug_@hotmail.com",
+      "atividades": {
+        "caminhada": false,
+        "trilha": false,
+        "musculacao": false,
+        "natacao": false,
+        "surf": true
+      }
+    }
   ]
 }

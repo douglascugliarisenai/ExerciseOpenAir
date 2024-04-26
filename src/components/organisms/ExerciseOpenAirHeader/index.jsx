@@ -2,22 +2,22 @@
 import "./style.css";
 import { Link } from "react-router-dom";
 
-function TrilhasHeader() {
+function ExerciseOpenAirHeader() {
  return (
   <div className="header">
    <div className="navbar">
     <span className="logo">
      <Link className="labelHome" to="/">
-      <img src="/assets/icone.png" alt="Logo da oágina" />
+      <img src="/assets/icone.png" alt="Logo da página" />
      </Link>
     </span>
 
     <ul className="menu">
      <li>
-      <Link to="/trilhas">Explorar Trilhas</Link>
+      <Link to="/trilhas">Cadastrar Local</Link>
      </li>
      <li>
-      <Link to="/cadastro">Cadastrar Trilhas</Link>
+      <Link to="/cadastro">Dashboard</Link>
      </li>
     </ul>
    </div>
@@ -25,4 +25,4 @@ function TrilhasHeader() {
  );
 }
 
-export default TrilhasHeader;
+export default ExerciseOpenAirHeader;
