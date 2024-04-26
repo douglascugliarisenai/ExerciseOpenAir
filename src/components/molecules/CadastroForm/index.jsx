@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useContext } from "react";
 import { UsuariosContext } from "../../../context/UsuarioContext";
-// import * as PropTypes from "prop-types";
+
 function CadastroForm() {
  const {
   register,
@@ -15,31 +15,22 @@ function CadastroForm() {
   formState: { errors }
  } = useForm();
 
- const { addUsuario, usuarios } = useContext(UsuariosContext);
+ const { cadastrarUsuario, usuarios } = useContext(UsuariosContext);
  const [cep, setCep] = useState("");
  const navigate = useNavigate();
 
  function sendCadastro(formValue) {
-  usuarios.map((usuario) => {
-   if (usuario.cpf == formValue.cpf) {
-    console.log("CPF ja cadastrado");
-   } else {
-    addUsuario({ ...formValue, cpf: formValue.cpf.replace(/\D/g, "") });
-    // navigate("/");
-   }
-  });
+  if (usuarios.find((usuario) => usuario.cpf === formValue.cpf)) {
+   alert("Usuario ja cadastrado");
 
-  if (usuarios.includes(formValue.cpf)) {
-   alert("CPF ja cadastrado");
-  } else {
-   addUsuario({ ...formValue, cpf: formValue.cpf.replace(/\D/g, "") });
-   navigate("/");
+   return;
   }
+
+  cadastrarUsuario({ ...formValue, cpf: formValue.cpf.replace(/\D/g, "") });
+  navigate("/");
  }
 
  const consultaCep = (event) => {
-  console.log(watch("cep"));
-
   if (event.key === "Enter" || event.key === "Tab") {
    event.preventDefault();
    fetch(`https://viacep.com.br/ws/${watch("cep")}/json/`)
@@ -269,21 +260,5 @@ function CadastroForm() {
   </>
  );
 }
-
-// CadastroForm.PropTypes = {
-//  dadosUsuario: PropTypes.exact({
-//   nome: PropTypes.string.isRequired,
-//   sexo: PropTypes.oneOf(["masculino", "feminino"]), //Enum do PropTypes
-//   cpf: PropTypes.string.isRequired,
-//   nascimento: PropTypes.string.isRequired,
-//   email: PropTypes.string.isRequired,
-//   senha: PropTypes.string.isRequired,
-//   cep: PropTypes.string.isRequired,
-//   logradouro: PropTypes.string.isRequired,
-//   numero: PropTypes.number.isRequired,
-//   municipio: PropTypes.string.isRequired,
-//   estado: PropTypes.string.isRequired
-//  })
-// };
 
 export default CadastroForm;

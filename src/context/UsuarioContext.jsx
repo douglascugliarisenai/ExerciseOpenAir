@@ -1,11 +1,13 @@
 /* eslint-disable */
 import { createContext, useState, useEffect } from "react";
-import useUsuarios from "../hooks/useUsuarios";
 
 export const UsuariosContext = createContext();
 export const UsuariosContextProvider = ({ children }) => {
- const [dados, isLoading] = useUsuarios("/data/usuarios.json");
- const [usuarios, setUsuario] = useState([]);
+ const [usuarios, setUsuarios] = useState([]);
+
+ useEffect(() => {
+  getUsuarios();
+ }, []);
 
  function login(dadosUsuario) {
   for (let usuario of usuarios) {
@@ -19,19 +21,35 @@ export const UsuariosContextProvider = ({ children }) => {
   return false;
  }
 
- function addUsuario(dadosUsuario) {
-  setUsuario((u) => [...u, dadosUsuario]);
+ async function getUsuarios() {
+  await fetch("http://localhost:3000/usuarios")
+   .then((response) => response.json())
+   .then((value) => setUsuarios(value))
+   .catch((error) => console.log(error));
  }
 
- useEffect(() => {
-  if (!!dados && !isLoading) {
-   setUsuario(dados.usuarios);
+ function cadastrarUsuario(dadosUsuario) {
+  if (dadosUsuario.nome == "") {
+   alert("O usuário precisa ter um nome!");
   }
- }, [dados]);
+
+  fetch("http://localhost:3000/usuarios", {
+   method: "POST",
+   body: JSON.stringify(dadosUsuario),
+   headers: {
+    "Content-Type": "application/json"
+   }
+  })
+   .then(() => {
+    alert("Usuário cadastrado com sucesso!");
+    getUsuarios();
+   })
+   .catch(() => alert("Erro ao cadastrar usuário!"));
+ }
 
  return (
   <UsuariosContext.Provider
-   value={{ usuarios, setUsuario, isLoading, login, addUsuario }}>
+   value={{ usuarios, setUsuarios, login, cadastrarUsuario }}>
    {children}
   </UsuariosContext.Provider>
  );
