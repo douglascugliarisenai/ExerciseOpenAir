@@ -1,12 +1,18 @@
-import { Select, TextField, MenuItem, Grid, Button } from "@mui/material";
+import {
+ Select,
+ TextField,
+ MenuItem,
+ Grid,
+ Button,
+ FormControl
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import "./index.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UsuariosContext } from "../../../context/UsuarioContext";
 
-function CadastroForm() {
+function CadastroUsuarioForm() {
  const {
   register,
   handleSubmit,
@@ -46,13 +52,13 @@ function CadastroForm() {
 
  return (
   <>
-   <Grid className="container-cadastro">
-    <Grid className="cadastro-form" sx={{ flexDirection: "column" }}>
+   <Grid className="containerCadastroUsuario">
+    <Grid className="cadastroFormUsuario" sx={{ flexDirection: "column" }}>
      <form>
-      <Grid className="logoCadastro">
+      <Grid className="logoCadastroUsuario">
        <img src="/assets/logo-exercita365.png" alt="Logo Exercita365" />
       </Grid>
-      <Grid className="gridNome" sx={{ flexDirection: "column" }}>
+      <Grid className="gridNomeUsuario" sx={{ flexDirection: "column" }}>
        <TextField
         type="text"
         variant="outlined"
@@ -70,13 +76,19 @@ function CadastroForm() {
        />
       </Grid>
       <Grid className="dadosComplementares">
-       <Select
-        error={!!errors.sexo}
-        helperText={errors.sexo?.message}
-        {...register("sexo", { required: true })}>
-        <MenuItem value="Masculino">Masculino</MenuItem>
-        <MenuItem value="Feminino">Feminino</MenuItem>
-       </Select>
+       <FormControl fullWidth>
+        <Select
+         defaultValue="Selecione"
+         {...register("sexo", {
+          required: "Este campo é obrigatório."
+         })}>
+         <MenuItem value="Selecione" disabled>
+          <em>Selecione o Sexo</em>
+         </MenuItem>
+         <MenuItem value="Masculino">Masculino</MenuItem>
+         <MenuItem value="Feminino">Feminino</MenuItem>
+        </Select>
+       </FormControl>
 
        <TextField
         placeholder="CPF"
@@ -113,6 +125,7 @@ function CadastroForm() {
         variant="outlined"
         error={!!errors.email}
         helperText={errors.email?.message}
+        autoComplete="username"
         {...register("email", {
          required: "Este campo é obrigatório.",
          maxLength: {
@@ -241,7 +254,9 @@ function CadastroForm() {
        />
       </Grid>
      </form>
-     <Grid className="containerButtonCadastro" sx={{ flexDirection: "column" }}>
+     <Grid
+      className="containerButtonCadastroUsuario"
+      sx={{ flexDirection: "column" }}>
       <Button
        onClick={handleSubmit(sendCadastro)}
        className="buttonCadastrar"
@@ -261,4 +276,4 @@ function CadastroForm() {
  );
 }
 
-export default CadastroForm;
+export default CadastroUsuarioForm;

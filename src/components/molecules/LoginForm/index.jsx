@@ -17,7 +17,8 @@ function LoginForm() {
 
  function sendLogin(formValue) {
   const validarLogin = login({
-   ...formValue
+   ...formValue,
+   isLogado: true
   });
 
   if (validarLogin) {
@@ -70,7 +71,7 @@ function LoginForm() {
       </Grid>
      </form>
      <Grid className="containerButtonLogin">
-      <Link to="/cadastro">
+      <Link to="/cadastroUsuario">
        <Button className="buttonRegister" variant="contained" size="medium">
         Registre-se
        </Button>
