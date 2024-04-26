@@ -1,23 +1,58 @@
 /* eslint-disable */
+import { Button, Menu, MenuItem } from "@mui/material";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function ExerciseOpenAirHeader() {
+ const [anchorEl, setAnchorEl] = useState(null);
+ const navigate = useNavigate();
+
+ const handleClick = (event) => {
+  setAnchorEl(event.currentTarget);
+ };
+
+ const handleClose = () => {
+  setAnchorEl(null);
+ };
+
+ const handleLogout = () => {
+  localStorage.removeItem("usuarioLogado");
+  navigate("/");
+  setAnchorEl(null);
+ };
+
+ const userName = "Nome do Usuário"; // Substitua pelo nome do usuário
  return (
   <div className="header">
    <div className="navbar">
-    <span className="logo">
+    <span className="logoHeader">
      <Link className="labelHome" to="/">
-      <img src="/assets/icone.png" alt="Logo da página" />
+      <img src="/assets/logo-exercita365.png" alt="Logo da página" />
      </Link>
     </span>
-
-    <ul className="menu">
+    <ul className="menuHeader">
      <li>
-      <Link to="/trilhas">Cadastrar Local</Link>
+      <Link to="/cadastroLocal">Cadastrar Local</Link>
      </li>
+
      <li>
-      <Link to="/cadastro">Dashboard</Link>
+      <Button
+       aria-controls="simple-menu"
+       aria-haspopup="true"
+       onClick={handleClick}
+       className="sair">
+       <img src="/assets/icone-usuario.png" alt="" />
+      </Button>
+      <Menu
+       id="simple-menu"
+       anchorEl={anchorEl}
+       keepMounted
+       open={Boolean(anchorEl)}
+       onClose={handleClose}>
+       <MenuItem disabled>{localStorage.getItem("usuarioLogado")}</MenuItem>
+       <MenuItem onClick={handleLogout}>Sair</MenuItem>
+      </Menu>
      </li>
     </ul>
    </div>

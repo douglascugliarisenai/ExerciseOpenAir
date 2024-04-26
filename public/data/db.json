@@ -1,7 +1,7 @@
 {
   "usuarios": [
     {
-      "id": "1",
+      "id": 1,
       "nome": "Douglas Filipe Moreira",
       "sexo": "Masculino",
       "cpf": "38734315993",
@@ -16,7 +16,7 @@
       "estado": "RJ"
     },
     {
-      "id": "2",
+      "id": 2,
       "nome": "Rodrigo Fernando Jesus",
       "sexo": "Masculino",
       "cpf": "38734315993",
@@ -31,7 +31,7 @@
       "estado": "RJ"
     },
     {
-      "id": "3",
+      "id": 3,
       "nome": "Jorge Felipe Lopes",
       "sexo": "Masculino",
       "cpf": "90462018563",
@@ -46,7 +46,7 @@
       "estado": "SE"
     },
     {
-      "id": "4",
+      "id": 4,
       "nome": "Manoel Leonardo Costa",
       "sexo": "Masculino",
       "cpf": "86890853431",
@@ -61,7 +61,7 @@
       "estado": "TO"
     },
     {
-      "id": "5",
+      "id": 5,
       "nome": "Sebastiana Isabelle Caldeira",
       "sexo": "Feminino",
       "cpf": "03486078062",
@@ -76,7 +76,7 @@
       "estado": "TO"
     },
     {
-      "id": "6",
+      "id": 6,
       "nome": "Cecília Alessandra Vera Rezende",
       "sexo": "Feminino",
       "cpf": "82185925717",
@@ -91,7 +91,7 @@
       "estado": "SP"
     },
     {
-      "id": "6f69",
+      "id": 7,
       "nome": "Douglas",
       "sexo": "Masculino",
       "cpf": "04014615995",
@@ -109,7 +109,7 @@
   ],
   "locais": [
     {
-      "id": "1b54",
+      "id": 1,
       "nome": "Douglas",
       "descricao": "Avenida Principal de Florianópolis",
       "cep": "88111120",
