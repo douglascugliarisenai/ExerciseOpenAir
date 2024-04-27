@@ -9,8 +9,8 @@ export const LocalContextProvider = ({ children }) => {
   getLocal();
  }, []);
 
- async function getLocal() {
-  await fetch("http://localhost:3000/locais")
+ function getLocal() {
+  fetch("http://localhost:3000/locais")
    .then((response) => response.json())
    .then((value) => setLocais(value))
    .catch((error) => console.log(error));
@@ -36,7 +36,8 @@ export const LocalContextProvider = ({ children }) => {
  }
 
  return (
-  <LocalContext.Provider value={{ locais, setLocais, cadastrarLocal }}>
+  <LocalContext.Provider
+   value={{ locais, setLocais, cadastrarLocal, getLocal }}>
    {children}
   </LocalContext.Provider>
  );
