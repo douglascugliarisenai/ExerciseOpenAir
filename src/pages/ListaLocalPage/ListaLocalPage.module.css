@@ -1,0 +1,19 @@
+#root div {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ height: 100%;
+ width: 100%;
+}
+
+.containerListaLocais {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ height: 100%;
+ width: 100%;
+ background-color: white;
+ gap: 10px;
+}

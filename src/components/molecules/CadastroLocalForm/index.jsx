@@ -80,10 +80,10 @@ function CadastroLocalForm() {
         type="text"
         variant="outlined"
         placeholder="Nome do Local"
-        error={!!errors.nome}
-        helperText={errors.nome?.message}
+        error={!!errors.nomeLocal}
+        helperText={errors.nomeLocal?.message}
         sx={{ height: "1rem" }}
-        {...register("nome", {
+        {...register("nomeLocal", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 100,

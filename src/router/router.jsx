@@ -7,11 +7,11 @@ import CadastroUsuarioPage from "../pages/CadastroUsuarioPage/CadastroUsuarioPag
 import ErroPage from "../pages/ErroPage/ErroPage";
 import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import CadastroLocalPage from "../pages/CadastroLocalPage/CadastroLocalPage";
+import ListaLocalPage from "../pages/ListaLocalPage/ListaLocalPage";
 
 const isAuthenticated = localStorage.getItem("usuarioLogado") !== null;
 
 const PrivateRoute = ({ children }) => {
- console.log(isAuthenticated);
  return isAuthenticated ? children : <LoginPage />;
 };
 
@@ -42,6 +42,14 @@ const routers = createBrowserRouter([
     element: (
      <PrivateRoute>
       <CadastroLocalPage />
+     </PrivateRoute>
+    )
+   },
+   {
+    path: "/listaLocal",
+    element: (
+     <PrivateRoute>
+      <ListaLocalPage />
      </PrivateRoute>
     )
    }

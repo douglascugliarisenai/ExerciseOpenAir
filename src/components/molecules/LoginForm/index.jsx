@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { TextField, Button } from "@mui/material";
 import "./index.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UsuariosContext } from "../../../context/UsuarioContext";
 import { useForm } from "react-hook-form";
@@ -13,8 +13,6 @@ function LoginForm() {
   formState: { errors }
  } = useForm();
 
- const navigate = useNavigate();
-
  function sendLogin(formValue) {
   const validarLogin = login({
    ...formValue,
@@ -22,7 +20,7 @@ function LoginForm() {
   });
 
   if (validarLogin) {
-   navigate("/dashboard");
+   window.location.href = "/dashboard";
    console.log("Login efetuado com sucesso");
   }
  }

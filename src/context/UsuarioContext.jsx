@@ -15,7 +15,7 @@ export const UsuariosContextProvider = ({ children }) => {
     usuario.email === dadosUsuario.email &&
     usuario.senha === dadosUsuario.senha
    ) {
-    localStorage.setItem("usuarioLogado", dadosUsuario.email);
+    localStorage.setItem("usuarioLogado", dadosUsuario);
     return true;
    }
   }

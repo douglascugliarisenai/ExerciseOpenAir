@@ -18,6 +18,7 @@ function ExerciseOpenAirHeader() {
 
  const handleLogout = () => {
   localStorage.removeItem("usuarioLogado");
+
   navigate("/");
   setAnchorEl(null);
  };
@@ -36,6 +37,9 @@ function ExerciseOpenAirHeader() {
       <Link to="/cadastroLocal">Cadastrar Local</Link>
      </li>
 
+     <li>
+      <Link to="/listaLocal">Listar Locais</Link>
+     </li>
      <li>
       <Button
        aria-controls="simple-menu"
