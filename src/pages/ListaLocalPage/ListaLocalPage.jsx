@@ -1,24 +1,27 @@
 import { useContext } from "react";
 import CardLocalForm from "../../components/molecules/CardLocalForm";
 import { LocalContext } from "../../../src/context/LocalContext";
-import { Grid } from "@mui/material";
 import styles from "./ListaLocalPage.module.css";
-import ExerciseOpenAirHeader from "../../components/organisms/ExerciseOpenAirHeader";
+import { Grid, Typography } from "@mui/material";
 
 function ListaLocalPage() {
  const { locais } = useContext(LocalContext);
 
  return (
-  <Grid sx={{ flexDirection: "column" }}>
-   <ExerciseOpenAirHeader />
-   <Grid className={styles.containerListaLocais}>
-    {locais.map(
-     (local, index) => (
-      console.log(local), (<CardLocalForm dadosLocal={local} key={index} />)
-     )
-    )}
+  <>
+   <Grid
+    sx={{ flexDirection: "column" }}
+    className={styles.containerListaLocais}>
+    <Grid sx={{ flexDirection: "column" }} className={styles.containerCards}>
+     <Typography className={styles.titulo}>Locais incríveis</Typography>
+     {locais.map(
+      (local, index) => (
+       console.log(local), (<CardLocalForm dadosLocal={local} key={index} />)
+      )
+     )}
+    </Grid>
    </Grid>
-  </Grid>
+  </>
  );
 }
 

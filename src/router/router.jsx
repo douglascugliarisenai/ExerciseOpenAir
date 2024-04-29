@@ -18,17 +18,17 @@ const PrivateRoute = ({ children }) => {
 const routers = createBrowserRouter([
  {
   path: "/",
+  element: <LoginPage />
+ },
+ {
+  path: "/cadastroUsuario",
+  element: <CadastroUsuarioPage />
+ },
+ {
+  path: "/",
   element: <App />,
   errorElement: <ErroPage />,
   children: [
-   {
-    path: "/",
-    element: <LoginPage />
-   },
-   {
-    path: "/cadastroUsuario",
-    element: <CadastroUsuarioPage />
-   },
    {
     path: "/dashboard",
     element: (

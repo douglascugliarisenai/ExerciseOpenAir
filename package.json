@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "server": "json-server --watch db.json",
+    "server": "json-server --watch ./data/db.json",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -21,7 +21,8 @@
     "react-imask": "^7.6.0",
     "react-input-mask": "^2.0.4",
     "react-number-format": "^5.3.4",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "json-server": "^1.0.0-alpha.23"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

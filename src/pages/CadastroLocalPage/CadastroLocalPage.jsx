@@ -1,13 +1,11 @@
 import { Grid } from "@mui/material";
-import ExerciseOpenAirHeader from "../../components/organisms/ExerciseOpenAirHeader";
-import CadastroLocalForm from "../../components/molecules/CadastroLocalForm";
 import styles from "./CadastroLocalPage.module.css";
+import CadastroLocalForm from "../../components/molecules/CadastroLocalForm";
 
 function CadastroLocalPage() {
  return (
   <>
-   <ExerciseOpenAirHeader />
-   <Grid className={styles.container}>
+   <Grid className={styles.containerPrincipalLocal}>
     <CadastroLocalForm />
    </Grid>
   </>

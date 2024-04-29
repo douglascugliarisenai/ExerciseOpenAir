@@ -35,9 +35,46 @@ export const LocalContextProvider = ({ children }) => {
    .catch(() => alert("Erro ao cadastrar local!"));
  }
 
+ function editarLocal(dadosLocal, id) {
+  if (dadosLocal.nome == "") {
+   alert("O usuário precisa ter um nome!");
+  }
+
+  fetch("http://localhost:3000/locais/" + id, {
+   method: "PUT",
+   body: JSON.stringify(dadosLocal),
+   headers: {
+    "Content-Type": "application/json"
+   }
+  })
+   .then(() => {
+    alert("Local Editado com sucesso!");
+    getLocal();
+   })
+   .catch(() => alert("Erro ao editar local!"));
+ }
+
+ function removerLocal(id) {
+  fetch("http://localhost:3000/locais/" + id, {
+   method: "DELETE"
+  })
+   .then(() => {
+    alert("Local removido com sucesso!");
+    getLocal();
+   })
+   .catch(() => alert("Erro ao remover Local!"));
+ }
+
  return (
   <LocalContext.Provider
-   value={{ locais, setLocais, cadastrarLocal, getLocal }}>
+   value={{
+    locais,
+    setLocais,
+    cadastrarLocal,
+    getLocal,
+    editarLocal,
+    removerLocal
+   }}>
    {children}
   </LocalContext.Provider>
  );

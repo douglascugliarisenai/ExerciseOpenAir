@@ -1,14 +1,15 @@
 import { Outlet } from "react-router-dom";
-import { UsuariosContextProvider } from "./context/UsuarioContext";
-import { LocalContextProvider } from "./context/LocalContext";
+
+import ExerciseOpenAirHeader from "./components/organisms/ExerciseOpenAirHeader";
+import ExerciseOpenAirFooter from "./components/organisms/ExerciseOpenAirFooter";
 
 function App() {
  return (
-  <UsuariosContextProvider>
-   <LocalContextProvider>
-    <Outlet />
-   </LocalContextProvider>
-  </UsuariosContextProvider>
+  <>
+   <ExerciseOpenAirHeader />
+   <Outlet />
+   <ExerciseOpenAirFooter />
+  </>
  );
 }
 

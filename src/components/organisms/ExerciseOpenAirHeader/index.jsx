@@ -3,6 +3,7 @@ import { Button, Menu, MenuItem } from "@mui/material";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function ExerciseOpenAirHeader() {
  const [anchorEl, setAnchorEl] = useState(null);
@@ -28,7 +29,7 @@ function ExerciseOpenAirHeader() {
   <div className="header">
    <div className="navbar">
     <span className="logoHeader">
-     <Link className="labelHome" to="/">
+     <Link className="labelHome" to="/dashboard">
       <img src="/assets/logo-exercita365.png" alt="Logo da página" />
      </Link>
     </span>
@@ -46,7 +47,7 @@ function ExerciseOpenAirHeader() {
        aria-haspopup="true"
        onClick={handleClick}
        className="sair">
-       <img src="/assets/icone-usuario.png" alt="" />
+       <AccountCircleIcon sx={{ color: "black", fontSize: 35 }} />
       </Button>
       <Menu
        id="simple-menu"
