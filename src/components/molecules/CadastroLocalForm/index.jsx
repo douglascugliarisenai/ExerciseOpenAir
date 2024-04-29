@@ -26,6 +26,8 @@ function CadastroLocalForm() {
  const { cadastrarLocal } = useContext(LocalContext);
  const navigate = useNavigate();
  const [cep, setCep] = useState("");
+ const [latitude, setLatitude] = useState("");
+ const [longitude, setLongitude] = useState("");
 
  const [atividades, setAtividades] = useState({
   caminhada: false,
@@ -43,11 +45,22 @@ function CadastroLocalForm() {
     .then((response) => response.json())
     .then((data) => {
      setCep(data);
+     consultaLatitudeLongitude();
     })
     .catch((error) => {
      console.error("Erro:", error);
     });
   }
+ };
+
+ const consultaLatitudeLongitude = () => {
+  console.log(cep.cep);
+  fetch(`https://cep.awesomeapi.com.br/json/${cep.cep}`)
+   .then((response) => response.json())
+   .then((data) => {
+    setLatitude(data.lat);
+    setLongitude(data.lng);
+   });
  };
 
  const getAtividadesSelecionadas = (event) => {
@@ -175,7 +188,7 @@ function CadastroLocalForm() {
         placeholder="Latitude"
         error={!!errors.latitude}
         helperText={errors.latitude?.message}
-        {...register("latitude", {
+        {...register("latitude", setValue("latitude", latitude), {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 10,
@@ -190,7 +203,7 @@ function CadastroLocalForm() {
         placeholder="Longitude"
         error={!!errors.longitude}
         helperText={errors.longitude?.message}
-        {...register("longitude", {
+        {...register("longitude", setValue("longitude", longitude), {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 10,

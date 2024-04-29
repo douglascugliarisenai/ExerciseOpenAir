@@ -1,51 +1,95 @@
 /* eslint-disable */
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import {
+ Box,
+ Divider,
+ Card,
+ CardContent,
+ IconButton,
+ Typography,
+ Chip,
+ Grid,
+ CardActions,
+ Button
+} from "@mui/material";
 import "./index.css";
-import { Grid } from "@mui/material";
+import { useContext } from "react";
+import { LocalContext } from "../../../context/LocalContext";
 
 function CardLocalForm({ dadosLocal }) {
+ const { removerLocal, editarLocal } = useContext(LocalContext);
+ const atividadesTrue = Object.entries(dadosLocal.atividades)
+  .filter(([key, value]) => value === true)
+  .map(([key, value]) => key);
+
+ //  function editarLocalSelecionado(dadosLocal, id) {}
+
  return (
-  <Grid className="containerCard">
-   <Card sx={{ display: "flex" }}>
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-     <CardContent sx={{ flex: "1 0 auto" }}>
-      <Typography component="div" variant="h5">
-       {dadosLocal.nome}
+  <>
+   <Card className="card_container" sx={{ boxShadow: 4 }}>
+    <Box>
+     <CardContent>
+      <Typography component="div" variant="h4">
+       {dadosLocal.nomeLocal}
       </Typography>
-      <Typography variant="body2" color="text.secondary">
+      <Typography variant="body1" color="text.secondary">
        {dadosLocal.descricao}
       </Typography>
+      <Divider>Endereço</Divider>
       <Typography variant="subtitle1" color="text.secondary" component="div">
-       {dadosLocal.logradouro}
+       Logradouro: {dadosLocal.logradouro}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
-       {dadosLocal.municipio} / {dadosLocal.estado}
+       Município/Estado: {dadosLocal.municipio} / {dadosLocal.estado}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
-       {dadosLocal.latitude}
+       Latitude: {dadosLocal.latitude}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
-       {dadosLocal.longitude}
+       Longitude: {dadosLocal.longitude}
       </Typography>
      </CardContent>
-     <Box sx={{ display: "flex", alignItems: "center", pl: 4, pb: 1 }}>
-      <Typography variant="subtitle1" color="text.secondary" component="div">
-       Atividades:
-      </Typography>
-      <IconButton aria-label="atividades">Caminhada</IconButton>
-      <IconButton aria-label="atividades">Surf</IconButton>
-      <IconButton aria-label="atividades">Corrida</IconButton>
-     </Box>
+
+     <Divider
+      sx={{ display: "flex", justifyContent: "center", width: "50rem" }}>
+      Atividades
+     </Divider>
+     <Grid
+      sx={{
+       display: "flex",
+       justifyContent: "center",
+       flexDirection: "row",
+       marginTop: "10px",
+       gap: "20px"
+      }}>
+      {atividadesTrue.map((atividade, index) => (
+       <Chip
+        label={atividade[0].toUpperCase() + atividade.slice(1)}
+        key={index}
+       />
+      ))}
+     </Grid>
+     <Divider
+      sx={{
+       display: "flex",
+       justifyContent: "center",
+       width: "50rem",
+       marginTop: "15px"
+      }}
+     />
+     <CardActions>
+      <Button
+       //    onClick={() => editarLocal(dadosLocal, dadosLocal.id)}
+       size="small">
+       Editar
+      </Button>
+      <Button onClick={() => removerLocal(dadosLocal.id)} size="small">
+       Excluir
+      </Button>
+     </CardActions>
     </Box>
    </Card>
-  </Grid>
+  </>
  );
 }
 
 export default CardLocalForm;
-
-//,, , Latitude, Longitede, atividades{}

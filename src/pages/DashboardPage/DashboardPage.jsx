@@ -1,11 +1,11 @@
-import ExerciseOpenAirHeader from "../../components/organisms/ExerciseOpenAirHeader";
+import { Grid } from "@mui/material";
+import styles from "./DashboardPage.module.css";
 
 function DashboardPage() {
  return (
-  <>
-   <ExerciseOpenAirHeader />
+  <Grid className={styles.containerPrincipalDashboard}>
    <h1>DashBoard</h1>
-  </>
+  </Grid>
  );
 }
 

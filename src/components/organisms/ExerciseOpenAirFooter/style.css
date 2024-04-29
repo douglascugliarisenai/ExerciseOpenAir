@@ -12,12 +12,12 @@
  align-items: center;
  height: 60px;
  width: 100%;
- background-color: #504908;
+ background-color: rgb(156 192 227);
  z-index: 100;
 }
 
 .footer span {
- color: white;
+ color: black;
  font-size: 16px;
  font-weight: 700;
  font-family: "Inter", sans-serif;
@@ -32,6 +32,7 @@
  font-weight: 700;
  font-family: "Inter", sans-serif;
  list-style-type: none;
+ text-decoration: none;
  margin-right: 50px;
 }
 
@@ -45,7 +46,6 @@
   font-size: 12px;
   font-weight: 600;
   font-family: "Inter", sans-serif;
-  /* margin-top: 50px; */
   width: 100%;
   z-index: 100;
  }
