@@ -46,6 +46,14 @@ const routers = createBrowserRouter([
     )
    },
    {
+    path: "/cadastroLocal/:id",
+    element: (
+     <PrivateRoute>
+      <CadastroLocalPage />
+     </PrivateRoute>
+    )
+   },
+   {
     path: "/listaLocal",
     element: (
      <PrivateRoute>

@@ -1,15 +1,7 @@
-function useLatitudeLongitude(cep) {
-    let data = {}
-    let error = null
+async function useLatitudeLongitude(cep) {
+    const response = await fetch(`https://cep.awesomeapi.com.br/json/${cep}`)
+    const data = await response.json();
+    return data;
 
-
-    fetch(`https://cep.awesomeapi.com.br/json/${cep}`)
-        .then((res) => res.json())
-        .then((res) => data = res)
-        .catch((err) => {
-            error = err
-        })
-
-    return { data, error }
 }
 export default useLatitudeLongitude;

@@ -14,14 +14,18 @@ import {
 import "./index.css";
 import { useContext } from "react";
 import { LocalContext } from "../../../context/LocalContext";
+import { useNavigate } from "react-router-dom";
 
 function CardLocalForm({ dadosLocal }) {
  const { removerLocal, editarLocal } = useContext(LocalContext);
+ const navigate = useNavigate();
  const atividadesTrue = Object.entries(dadosLocal.atividades)
   .filter(([key, value]) => value === true)
   .map(([key, value]) => key);
 
- //  function editarLocalSelecionado(dadosLocal, id) {}
+ function editarLocalSelecionado(idSelecionado) {
+  navigate(`/cadastroLocal/${idSelecionado}`);
+ }
 
  return (
   <>
@@ -78,7 +82,7 @@ function CardLocalForm({ dadosLocal }) {
      />
      <CardActions>
       <Button
-       //    onClick={() => editarLocal(dadosLocal, dadosLocal.id)}
+       onClick={() => editarLocalSelecionado(dadosLocal.id)}
        size="small">
        Editar
       </Button>

@@ -1,19 +1,7 @@
-function useBuscaCep(cep) {
-  let data = {}
-  let error = null
+async function useBuscaCep(cep) {
+  const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+  const data = await response.json();
 
-
-  fetch(`https://viacep.com.br/ws/${cep}/json/`)
-    .then((res) => res.json())
-    .then((res) => data = res)
-    .then(() => {
-      alert("Usuário cadastrado com sucesso!");
-    })
-    .catch((err) => {
-      error = err
-    })
-    .catch(() => alert("Erro ao cadastrar usuário!"));
-
-  return { data, error }
+  return data;
 }
 export default useBuscaCep;

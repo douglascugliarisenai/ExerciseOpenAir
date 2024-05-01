@@ -16,6 +16,12 @@ export const LocalContextProvider = ({ children }) => {
    .catch((error) => console.log(error));
  }
 
+ async function getLocalPorId(idConsulta) {
+  const response = await fetch("http://localhost:3000/locais/" + idConsulta);
+  const dados = await response.json();
+  return dados;
+ }
+
  function cadastrarLocal(dadosLocal) {
   if (dadosLocal.nome == "") {
    alert("O local precisa ter um nome!");
@@ -36,13 +42,14 @@ export const LocalContextProvider = ({ children }) => {
  }
 
  function editarLocal(dadosLocal, id) {
-  if (dadosLocal.nome == "") {
-   alert("O usuário precisa ter um nome!");
-  }
+  const localAtualizar = {
+   ...dadosLocal,
+   id: id
+  };
 
   fetch("http://localhost:3000/locais/" + id, {
    method: "PUT",
-   body: JSON.stringify(dadosLocal),
+   body: JSON.stringify(localAtualizar),
    headers: {
     "Content-Type": "application/json"
    }
@@ -73,7 +80,8 @@ export const LocalContextProvider = ({ children }) => {
     cadastrarLocal,
     getLocal,
     editarLocal,
-    removerLocal
+    removerLocal,
+    getLocalPorId
    }}>
    {children}
   </LocalContext.Provider>
