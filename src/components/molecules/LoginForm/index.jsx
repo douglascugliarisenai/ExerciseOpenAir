@@ -14,15 +14,9 @@ function LoginForm() {
  } = useForm();
 
  function sendLogin(formValue) {
-  const validarLogin = login({
-   ...formValue,
-   isLogado: true
+  login({
+   ...formValue
   });
-
-  if (validarLogin) {
-   window.location.href = "/dashboard";
-   console.log("Login efetuado com sucesso");
-  }
  }
 
  return (

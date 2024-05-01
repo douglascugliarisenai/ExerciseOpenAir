@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
  TextField,
  Grid,
@@ -10,9 +11,11 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import "./index.css";
-import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
 import { LocalContext } from "../../../context/LocalContext";
+import useBuscaCep from "../../../hooks/useBuscaCep";
+import useLatitudeLongitude from "../../../hooks/useLatitudeLongitude";
 
 function CadastroLocalForm() {
  const {
@@ -23,11 +26,14 @@ function CadastroLocalForm() {
   formState: { errors }
  } = useForm();
 
- const { cadastrarLocal } = useContext(LocalContext);
+ const { cadastrarLocal, getLocalPorId, editarLocal } =
+  useContext(LocalContext);
  const navigate = useNavigate();
  const [cep, setCep] = useState("");
  const [latitude, setLatitude] = useState("");
  const [longitude, setLongitude] = useState("");
+ const { id } = useParams();
+ const [label, setLabel] = useState("Cadastrar");
 
  const [atividades, setAtividades] = useState({
   caminhada: false,
@@ -38,29 +44,17 @@ function CadastroLocalForm() {
  });
  const { caminhada, trilha, musculacao, natacao, surf } = atividades;
 
- const consultaCep = (event) => {
+ const consultaCep = async (event) => {
   if (event.key === "Enter" || event.key === "Tab") {
    event.preventDefault();
-   fetch(`https://viacep.com.br/ws/${watch("cep")}/json/`)
-    .then((response) => response.json())
-    .then((data) => {
-     setCep(data);
-     consultaLatitudeLongitude();
-    })
-    .catch((error) => {
-     console.error("Erro:", error);
-    });
-  }
- };
+   const dadosCep = await useBuscaCep(watch("cep"));
+   setCep(dadosCep);
 
- const consultaLatitudeLongitude = () => {
-  console.log(cep.cep);
-  fetch(`https://cep.awesomeapi.com.br/json/${cep.cep}`)
-   .then((response) => response.json())
-   .then((data) => {
-    setLatitude(data.lat);
-    setLongitude(data.lng);
-   });
+   const dadosLatLong = await useLatitudeLongitude(watch("cep"));
+   setLatitude(dadosLatLong.lat);
+   setLongitude(dadosLatLong.lng);
+   carregarDadosEndereco();
+  }
  };
 
  const getAtividadesSelecionadas = (event) => {
@@ -71,14 +65,54 @@ function CadastroLocalForm() {
  };
 
  function sendLocal(formValue) {
-  cadastrarLocal({
-   ...formValue,
-   usuario: localStorage.getItem("usuarioLogado"),
-   atividades: atividades
-  });
+  if (id != "" && id !== undefined) {
+   editarLocal(
+    {
+     ...formValue,
+     usuario: localStorage.getItem("usuarioLogado"),
+     atividades: atividades
+    },
+    id
+   );
+  } else {
+   cadastrarLocal({
+    ...formValue,
+    usuario: localStorage.getItem("usuarioLogado"),
+    atividades: atividades
+   });
+  }
 
   navigate("/dashboard");
  }
+
+ function carregarDadosEndereco() {
+  setValue("logradouro", cep.logradouro);
+  setValue("municipio", cep.localidade);
+  setValue("estado", cep.uf);
+  setValue("latitude", latitude);
+  setValue("longitude", longitude);
+ }
+
+ function carregarDadosEdicao(idSelecionado) {
+  getLocalPorId(idSelecionado).then((response) => {
+   setValue("nomeLocal", response.nomeLocal);
+   setValue("descricao", response.descricao);
+   setValue("cep", response.cep);
+   setValue("logradouro", response.logradouro);
+   setValue("municipio", response.municipio);
+   setValue("estado", response.estado);
+   setValue("latitude", response.latitude);
+   setValue("longitude", response.longitude);
+   setAtividades(response.atividades);
+  });
+ }
+
+ useEffect(() => {
+  if (id != "" && id !== undefined) {
+   carregarDadosEdicao(id);
+   setLabel("Editar");
+  }
+ }, [id]);
 
  return (
   <>
@@ -143,7 +177,7 @@ function CadastroLocalForm() {
         placeholder="Logradouro"
         error={!!errors.logradouro}
         helperText={errors.logradouro?.message}
-        {...register("logradouro", setValue("logradouro", cep.logradouro), {
+        {...register("logradouro", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 30,
@@ -158,7 +192,7 @@ function CadastroLocalForm() {
         placeholder="Município"
         error={!!errors.municipio}
         helperText={errors.municipio?.message}
-        {...register("municipio", setValue("municipio", cep.localidade), {
+        {...register("municipio", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 20,
@@ -173,7 +207,7 @@ function CadastroLocalForm() {
         placeholder="Estado"
         error={!!errors.estado}
         helperText={errors.estado?.message}
-        {...register("estado", setValue("estado", cep.uf), {
+        {...register("estado", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 2,
@@ -188,7 +222,7 @@ function CadastroLocalForm() {
         placeholder="Latitude"
         error={!!errors.latitude}
         helperText={errors.latitude?.message}
-        {...register("latitude", setValue("latitude", latitude), {
+        {...register("latitude", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 10,
@@ -203,7 +237,7 @@ function CadastroLocalForm() {
         placeholder="Longitude"
         error={!!errors.longitude}
         helperText={errors.longitude?.message}
-        {...register("longitude", setValue("longitude", longitude), {
+        {...register("longitude", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 10,
@@ -287,7 +321,7 @@ function CadastroLocalForm() {
        className="buttonCadastrar"
        variant="contained"
        size="medium">
-       Cadastrar
+       {label}
       </Button>
      </Grid>
     </Grid>
