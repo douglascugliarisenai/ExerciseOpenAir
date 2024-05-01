@@ -4,10 +4,13 @@ import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useContext } from "react";
+import { UsuariosContext } from "../../../context/UsuarioContext";
 
 function ExerciseOpenAirHeader() {
  const [anchorEl, setAnchorEl] = useState(null);
  const navigate = useNavigate();
+ const { logout } = useContext(UsuariosContext);
 
  const handleClick = (event) => {
   setAnchorEl(event.currentTarget);
@@ -18,13 +21,13 @@ function ExerciseOpenAirHeader() {
  };
 
  const handleLogout = () => {
+  logout(localStorage.getItem("usuarioLogado"));
   localStorage.removeItem("usuarioLogado");
 
   navigate("/");
   setAnchorEl(null);
  };
 
- const userName = "Nome do Usuário"; // Substitua pelo nome do usuário
  return (
   <div className="header">
    <div className="navbar">

@@ -1,10 +1,10 @@
 /* eslint-disable */
 import { createContext, useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
 
 export const UsuariosContext = createContext();
 export const UsuariosContextProvider = ({ children }) => {
  const [usuarios, setUsuarios] = useState([]);
+ const [totalOnline, setTotalOnline] = useState(0);
 
  useEffect(() => {
   getUsuarios();
@@ -24,7 +24,10 @@ export const UsuariosContextProvider = ({ children }) => {
       localStorage.setItem("usuarioLogado", dadosUsuario.email);
 
       window.location.href = "/dashboard";
+
+      setTotalOnline(totalOnline + 1);
       atualizarStatusUsuario(usuario, usuario.id, true);
+      console.log(totalOnline);
       return;
      }
 
@@ -40,10 +43,11 @@ export const UsuariosContextProvider = ({ children }) => {
  }
 
  async function getUsuarios() {
-  await fetch("http://localhost:3000/usuarios")
-   .then((response) => response.json())
-   .then((value) => setUsuarios(value))
-   .catch((error) => console.log(error));
+  const response = await fetch("http://localhost:3000/usuarios");
+  const data = await response.json();
+
+  setUsuarios(data);
+  setTotalOnline(data.filter((usuario) => usuario.isOnline).length);
  }
 
  function cadastrarUsuario(dadosUsuario) {
@@ -91,9 +95,29 @@ export const UsuariosContextProvider = ({ children }) => {
    .catch(() => console.log("Erro ao atualizar Usuário!"));
  }
 
+ async function logout(emailUsuarioLogado) {
+  const response = await fetch("http://localhost:3000/usuarios");
+  const dados = await response.json();
+
+  dados.map((usuario) => {
+   if (usuario.email == emailUsuarioLogado) {
+    atualizarStatusUsuario(usuario, usuario.id, false);
+    setTotalOnline((totalOnline) => totalOnline - 1);
+    return;
+   }
+  });
+ }
+
  return (
   <UsuariosContext.Provider
-   value={{ usuarios, setUsuarios, login, cadastrarUsuario }}>
+   value={{
+    usuarios,
+    setUsuarios,
+    login,
+    cadastrarUsuario,
+    totalOnline,
+    logout
+   }}>
    {children}
   </UsuariosContext.Provider>
  );
