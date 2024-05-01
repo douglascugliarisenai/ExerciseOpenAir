@@ -14,9 +14,11 @@ function ListaLocalPage() {
     className={styles.containerListaLocais}>
     <Grid sx={{ flexDirection: "column" }} className={styles.containerCards}>
      <Typography className={styles.titulo}>Locais incríveis</Typography>
-     {locais.map((local, index) => (
-      <CardLocalForm dadosLocal={local} key={index} />
-     ))}
+     {locais.map(
+      (local, index) => (
+       console.log(local), (<CardLocalForm dadosLocal={local} key={index} />)
+      )
+     )}
     </Grid>
    </Grid>
   </>
