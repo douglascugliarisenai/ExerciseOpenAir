@@ -107,11 +107,30 @@ function CadastroLocalForm() {
   });
  }
 
+ function limparCampos() {
+  setValue("nomeLocal", "");
+  setValue("descricao", "");
+  setValue("cep", "");
+  setValue("logradouro", "");
+  setValue("municipio", "");
+  setValue("estado", "");
+  setValue("latitude", "");
+  setValue("longitude", "");
+  setAtividades({
+   caminhada: false,
+   trilha: false,
+   musculacao: false,
+   natacao: false,
+   surf: false
+  });
+ }
+
  useEffect(() => {
   if (id != "" && id !== undefined) {
    carregarDadosEdicao(id);
    setLabel("Editar");
   }
+  limparCampos();
  }, [id]);
 
  return (
@@ -148,7 +167,7 @@ function CadastroLocalForm() {
         {...register("descricao", {
          required: "Este campo é obrigatório.",
          maxLength: {
-          value: 100,
+          value: 150,
           message: "Este campo aceita no máximo 100 caracteres."
          }
         })}
@@ -180,7 +199,7 @@ function CadastroLocalForm() {
         {...register("logradouro", {
          required: "Este campo é obrigatório.",
          maxLength: {
-          value: 30,
+          value: 60,
           message: "Este campo aceita no máximo 30 caracteres."
          }
         })}
