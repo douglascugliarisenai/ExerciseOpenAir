@@ -4,7 +4,6 @@ import {
  Divider,
  Card,
  CardContent,
- IconButton,
  Typography,
  Chip,
  Grid,
@@ -12,24 +11,45 @@ import {
  Button
 } from "@mui/material";
 import "./index.css";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { LocalContext } from "../../../context/LocalContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import MapaForm from "../MapaForm";
+import { useEffect } from "react";
 
 function CardLocalForm({ dadosLocal }) {
- const { removerLocal, editarLocal } = useContext(LocalContext);
+ const { removerLocal } = useContext(LocalContext);
  const navigate = useNavigate();
  const atividadesTrue = Object.entries(dadosLocal.atividades)
   .filter(([key, value]) => value === true)
   .map(([key, value]) => key);
+ const location = useLocation();
+ const [visivel, setVisivel] = useState(true);
 
  function editarLocalSelecionado(idSelecionado) {
   navigate(`/cadastroLocal/${idSelecionado}`);
  }
 
+ useEffect(() => {
+  console.log(location.pathname == "/dashboard");
+  if (location.pathname == "/dashboard") {
+   setVisivel(false);
+  } else {
+   setVisivel(true);
+  }
+ }, []);
+
  return (
   <>
    <Card className="card_container" sx={{ boxShadow: 4 }}>
+    <Grid
+     height={352}
+     width={300}
+     mr={2}
+     sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+     <MapaForm {...dadosLocal} />
+    </Grid>
+
     <Box>
      <CardContent>
       <Typography component="div" variant="h4">
@@ -80,7 +100,19 @@ function CardLocalForm({ dadosLocal }) {
        marginTop: "15px"
       }}
      />
-     <CardActions>
+     {visivel && (
+      <CardActions className="cardActions">
+       <Button
+        onClick={() => editarLocalSelecionado(dadosLocal.id)}
+        size="small">
+        Editar
+       </Button>
+       <Button onClick={() => removerLocal(dadosLocal.id)} size="small">
+        Excluir
+       </Button>
+      </CardActions>
+     )}
+     <CardActions className="cardActions">
       <Button
        onClick={() => editarLocalSelecionado(dadosLocal.id)}
        size="small">

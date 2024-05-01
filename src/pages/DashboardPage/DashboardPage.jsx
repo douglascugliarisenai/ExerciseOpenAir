@@ -10,6 +10,7 @@ import PeopleIcon from "@mui/icons-material/People";
 function DashboardPage() {
  const { totalOnline } = useContext(UsuariosContext);
  const { locais, totalLocais } = useContext(LocalContext);
+
  return (
   <Grid
    sx={{ flexDirection: "column" }}
@@ -22,9 +23,7 @@ function DashboardPage() {
      <FmdGoodIcon sx={{ color: "black", fontSize: 35 }} />
     </Badge>
    </Grid>
-   <Typography variant="h3" className={styles.titulo}>
-    Locais incríveis
-   </Typography>
+   <Typography className={styles.titulo}>Locais incríveis</Typography>
    <Grid className={styles.card}>
     {locais.map((local, index) => (
      <CardLocalForm dadosLocal={local} key={index} />
