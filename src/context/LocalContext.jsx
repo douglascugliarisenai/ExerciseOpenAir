@@ -4,16 +4,18 @@ import { createContext, useState, useEffect } from "react";
 export const LocalContext = createContext();
 export const LocalContextProvider = ({ children }) => {
  const [locais, setLocais] = useState([]);
+ const [totalLocais, setTotalLocais] = useState(0);
 
  useEffect(() => {
   getLocal();
  }, []);
 
- function getLocal() {
-  fetch("http://localhost:3000/locais")
-   .then((response) => response.json())
-   .then((value) => setLocais(value))
-   .catch((error) => console.log(error));
+ async function getLocal() {
+  const response = await fetch("http://localhost:3000/locais");
+  const data = await response.json();
+
+  setLocais(data);
+  setTotalLocais(data.length);
  }
 
  async function getLocalPorId(idConsulta) {
@@ -35,6 +37,7 @@ export const LocalContextProvider = ({ children }) => {
    }
   })
    .then(() => {
+    setTotalLocais(totalLocais + 1);
     alert("Local cadastrado com sucesso!");
     getLocal();
    })
@@ -66,6 +69,7 @@ export const LocalContextProvider = ({ children }) => {
    method: "DELETE"
   })
    .then(() => {
+    setTotalLocais(totalLocais - 1);
     alert("Local removido com sucesso!");
     getLocal();
    })
@@ -81,7 +85,8 @@ export const LocalContextProvider = ({ children }) => {
     getLocal,
     editarLocal,
     removerLocal,
-    getLocalPorId
+    getLocalPorId,
+    totalLocais
    }}>
    {children}
   </LocalContext.Provider>
