@@ -22,7 +22,7 @@ function LoginForm() {
  return (
   <>
    <Grid className="containerLogin" sx={{ flexDirection: "column" }}>
-    <Grid className="login-form" sx={{ flexDirection: "column" }}>
+    <Grid className="loginForm" sx={{ flexDirection: "column" }}>
      <form className="form">
       <Grid className="logo">
        <img src="/assets/logo-exercita365.png" alt="Logo Exercita365" />

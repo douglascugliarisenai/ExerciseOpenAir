@@ -41,8 +41,9 @@ function CardLocalForm({ dadosLocal }) {
 
  return (
   <>
-   <Card className="card_container" sx={{ boxShadow: 4 }}>
+   <Card className="cardContainer" sx={{ boxShadow: 4 }}>
     <Grid
+     className="containerMapa"
      height={352}
      width={300}
      mr={2}
@@ -50,19 +51,27 @@ function CardLocalForm({ dadosLocal }) {
      <MapaForm {...dadosLocal} />
     </Grid>
 
-    <Box>
-     <CardContent>
-      <Typography component="div" variant="h4">
+    <Box className="boxDados">
+     <CardContent className="containerDados">
+      <Typography component="div" variant="h4" className="nomeLocal">
        {dadosLocal.nomeLocal}
       </Typography>
-      <Typography variant="body1" color="text.secondary">
+      <Typography variant="body1" color="text.secondary" className="descricao">
        {dadosLocal.descricao}
       </Typography>
-      <Divider>Endereço</Divider>
-      <Typography variant="subtitle1" color="text.secondary" component="div">
+      <Divider className="dividerEndereco">Endereço</Divider>
+      <Typography
+       variant="subtitle1"
+       color="text.secondary"
+       component="div"
+       className="endereco">
        Logradouro: {dadosLocal.logradouro}
       </Typography>
-      <Typography variant="subtitle1" color="text.secondary" component="div">
+      <Typography
+       variant="subtitle1"
+       color="text.secondary"
+       component="div"
+       className="municipio">
        Município/Estado: {dadosLocal.municipio} / {dadosLocal.estado}
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" component="div">
@@ -73,11 +82,10 @@ function CardLocalForm({ dadosLocal }) {
       </Typography>
      </CardContent>
 
-     <Divider
-      sx={{ display: "flex", justifyContent: "center", width: "50rem" }}>
-      Atividades
-     </Divider>
+     <Divider className="dividerAtividades">Atividades</Divider>
+
      <Grid
+      className="containerAtividades"
       sx={{
        display: "flex",
        justifyContent: "center",
@@ -94,9 +102,6 @@ function CardLocalForm({ dadosLocal }) {
      </Grid>
      <Divider
       sx={{
-       display: "flex",
-       justifyContent: "center",
-       width: "50rem",
        marginTop: "15px"
       }}
      />
@@ -112,16 +117,6 @@ function CardLocalForm({ dadosLocal }) {
        </Button>
       </CardActions>
      )}
-     <CardActions className="cardActions">
-      <Button
-       onClick={() => editarLocalSelecionado(dadosLocal.id)}
-       size="small">
-       Editar
-      </Button>
-      <Button onClick={() => removerLocal(dadosLocal.id)} size="small">
-       Excluir
-      </Button>
-     </CardActions>
     </Box>
    </Card>
   </>

@@ -40,13 +40,27 @@
  margin: 0 10px;
 }
 
-@media (min-width: 320px) and (max-width: 768px) {
- .footer {
+@media (min-width: 200px) and (max-width: 640px) {
+ .container-footer .footer {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  font-size: 12px;
-  font-weight: 600;
-  font-family: "Inter", sans-serif;
+  flex-direction: column;
+  height: 100%;
   width: 100%;
-  z-index: 100;
+ }
+
+ .footer span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+ }
+
+ .footer ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
  }
 }

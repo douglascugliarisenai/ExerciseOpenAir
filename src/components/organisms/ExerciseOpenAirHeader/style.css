@@ -81,3 +81,27 @@
 .navbar li {
  list-style: none;
 }
+
+@media (min-width: 200px) and (max-width: 640px) {
+ .header {
+  height: 100%;
+  width: 100vw;
+ }
+
+ .header .navbar {
+  height: 100%;
+  width: 100vw;
+ }
+
+ .header .navbar ul {
+  font-size: 15px;
+ }
+
+ .logoHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-right: 50px;
+ }
+}

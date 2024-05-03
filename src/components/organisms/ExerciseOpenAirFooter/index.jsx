@@ -3,10 +3,11 @@ import "../../../../src/App.css";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { Grid } from "@mui/material";
 
 function TrilhasFooter() {
  return (
-  <div className="container-footer">
+  <Grid className="containerFooter">
    <footer className="footer">
     <span>Exercise Open Air</span>
     <ul>
@@ -27,7 +28,7 @@ function TrilhasFooter() {
      </li>
     </ul>
    </footer>
-  </div>
+  </Grid>
  );
 }
 
