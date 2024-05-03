@@ -142,30 +142,70 @@
  font-weight: bold;
 }
 
-@media (min-width: 320px) and (max-width: 1024px) {
- .cadastroFormLocal {
+@media (min-width: 200px) and (max-width: 640px) {
+ .containerCadastroLocal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+ }
+
+ .containerCadastroLocal .cadastroFormLocal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
   width: 100%;
+  background-color: #e5e5e5;
+ }
+
+ .containerCadastroLocal .cadastroFormLocal form {
+  width: 17rem;
+  height: 100%;
+  background-color: white;
+  border-radius: 15px;
+ }
+
+ .cadastroFormLocal .gridNomeLocal {
+  width: 15rem;
+ }
+
+ .cadastroFormLocal .dadosComplementares {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+ }
+
+ .cadastroFormLocal .dadosEndereco {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
   height: 100%;
  }
 
- .cadastroFormLocal form {
+ .cadastroFormLocal .dadosEndereco div {
   width: 100%;
-  height: 100%;
-  border-radius: 0;
+ }
+
+ .cadastroFormLocal form .containerSelecoes {
+  margin-top: 0;
  }
 
  .containerButtonCadastro {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 0;
  }
 
- .containerButtonCadastro button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+ .containerButtonCadastro .buttonDashBoard {
+  font-size: 10px;
+ }
+
+ .containerButtonCadastro .buttonCadastrar {
+  font-size: 10px;
  }
 }
