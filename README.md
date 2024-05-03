@@ -24,6 +24,7 @@ Encontrar locais adequados para exercícios ao ar livre pode ser desafiador, esp
 
 - _Integração com Banco de Dados:_ Sincronização com dispositivos vestíveis para rastrear atividades.
 - _Segurança:_ Inclusão de funcionalidade de autenticação para garantir uma segurança para os usuários.
+- _Projeto:_ Melhorar a organização do projeto e separar bem as responsabilidades.
 
 ## Contribuições
 

@@ -21,7 +21,7 @@ function CadastroLocalForm() {
  const {
   register,
   handleSubmit,
-  watch,
+  getValues,
   setValue,
   formState: { errors }
  } = useForm();
@@ -29,9 +29,7 @@ function CadastroLocalForm() {
  const { cadastrarLocal, getLocalPorId, editarLocal } =
   useContext(LocalContext);
  const navigate = useNavigate();
- const [cep, setCep] = useState("");
- const [latitude, setLatitude] = useState("");
- const [longitude, setLongitude] = useState("");
+
  const { id } = useParams();
  const [label, setLabel] = useState("Cadastrar");
 
@@ -44,17 +42,14 @@ function CadastroLocalForm() {
  });
  const { caminhada, trilha, musculacao, natacao, surf } = atividades;
 
- const consultaCep = async (event) => {
-  if (event.key === "Enter" || event.key === "Tab") {
-   event.preventDefault();
-   const dadosCep = await useBuscaCep(watch("cep"));
-   setCep(dadosCep);
-
-   const dadosLatLong = await useLatitudeLongitude(watch("cep"));
-   setLatitude(dadosLatLong.lat);
-   setLongitude(dadosLatLong.lng);
-   carregarDadosEndereco();
-  }
+ const consultaCep = async () => {
+  const dadosCep = await useBuscaCep(getValues("cep"));
+  setValue("logradouro", dadosCep.logradouro);
+  setValue("municipio", dadosCep.localidade);
+  setValue("estado", dadosCep.uf);
+  const dadosLatLong = await useLatitudeLongitude(getValues("cep"));
+  setValue("latitude", dadosLatLong.lat);
+  setValue("longitude", dadosLatLong.lng);
  };
 
  const getAtividadesSelecionadas = (event) => {
@@ -83,14 +78,6 @@ function CadastroLocalForm() {
   }
 
   navigate("/dashboard");
- }
-
- function carregarDadosEndereco() {
-  setValue("logradouro", cep.logradouro);
-  setValue("municipio", cep.localidade);
-  setValue("estado", cep.uf);
-  setValue("latitude", latitude);
-  setValue("longitude", longitude);
  }
 
  function carregarDadosEdicao(idSelecionado) {
@@ -180,9 +167,9 @@ function CadastroLocalForm() {
         variant="outlined"
         error={!!errors.cep}
         helperText={errors.cep?.message}
-        onKeyDown={consultaCep}
         {...register("cep", {
          required: "Este campo é obrigatório.",
+         onBlur: () => consultaCep(),
          maxLength: {
           value: 8,
           message: "Este campo aceita no máximo 8 caracteres."

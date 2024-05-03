@@ -9,20 +9,22 @@ import {
 import { useForm } from "react-hook-form";
 import "./index.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { UsuariosContext } from "../../../context/UsuarioContext";
+import useBuscaCep from "../../../hooks/useBuscaCep";
 
 function CadastroUsuarioForm() {
  const {
   register,
   handleSubmit,
   watch,
+  getValues,
   setValue,
   formState: { errors }
  } = useForm();
 
  const { cadastrarUsuario, usuarios } = useContext(UsuariosContext);
- const [cep, setCep] = useState("");
+
  const navigate = useNavigate();
 
  function sendCadastro(formValue) {
@@ -36,18 +38,11 @@ function CadastroUsuarioForm() {
   navigate("/");
  }
 
- const consultaCep = (event) => {
-  if (event.key === "Enter" || event.key === "Tab") {
-   event.preventDefault();
-   fetch(`https://viacep.com.br/ws/${watch("cep")}/json/`)
-    .then((response) => response.json())
-    .then((data) => {
-     setCep(data);
-    })
-    .catch((error) => {
-     console.error("Erro:", error);
-    });
-  }
+ const consultaCep = async () => {
+  const dadosCep = await useBuscaCep(getValues("cep"));
+  setValue("logradouro", dadosCep.logradouro);
+  setValue("municipio", dadosCep.localidade);
+  setValue("estado", dadosCep.uf);
  };
 
  return (
@@ -169,9 +164,9 @@ function CadastroUsuarioForm() {
         variant="outlined"
         error={!!errors.cep}
         helperText={errors.cep?.message}
-        onKeyDown={consultaCep}
         {...register("cep", {
          required: "Este campo é obrigatório.",
+         onBlur: () => consultaCep(),
          maxLength: {
           value: 8,
           message: "Este campo aceita no máximo 8 caracteres."
@@ -185,7 +180,7 @@ function CadastroUsuarioForm() {
         placeholder="Logradouro"
         error={!!errors.logradouro}
         helperText={errors.logradouro?.message}
-        {...register("logradouro", setValue("logradouro", cep.logradouro), {
+        {...register("logradouro", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 30,
@@ -200,7 +195,7 @@ function CadastroUsuarioForm() {
         placeholder="Município"
         error={!!errors.municipio}
         helperText={errors.municipio?.message}
-        {...register("municipio", setValue("municipio", cep.localidade), {
+        {...register("municipio", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 30,
@@ -215,7 +210,7 @@ function CadastroUsuarioForm() {
         placeholder="Estado"
         error={!!errors.estado}
         helperText={errors.estado?.message}
-        {...register("estado", setValue("estado", cep.uf), {
+        {...register("estado", {
          required: "Este campo é obrigatório.",
          maxLength: {
           value: 2,
