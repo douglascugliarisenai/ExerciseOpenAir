@@ -17,7 +17,7 @@ Encontrar locais adequados para exercícios ao ar livre pode ser desafiador, esp
 
 1. Clone o repositório para sua máquina local.
 2. Instale as dependências com npm install.
-3. Inicie o servidor com npm start.
+3. Inicie o servidor com npm run dev.
 4. Acesse http://localhost:5173 em seu navegador.
 
 ## Melhorias Futuras
