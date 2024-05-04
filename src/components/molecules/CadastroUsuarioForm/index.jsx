@@ -39,10 +39,14 @@ function CadastroUsuarioForm() {
  }
 
  const consultaCep = async () => {
-  const dadosCep = await useBuscaCep(getValues("cep"));
-  setValue("logradouro", dadosCep.logradouro);
-  setValue("municipio", dadosCep.localidade);
-  setValue("estado", dadosCep.uf);
+  let cepConsulta = getValues("cep").replace(/\D/g, "");
+  if (cepConsulta !== "") {
+   console.log(typeof cepConsulta.length);
+   const dadosCep = await useBuscaCep(cepConsulta);
+   setValue("logradouro", dadosCep.logradouro);
+   setValue("municipio", dadosCep.localidade);
+   setValue("estado", dadosCep.uf);
+  }
  };
 
  return (
