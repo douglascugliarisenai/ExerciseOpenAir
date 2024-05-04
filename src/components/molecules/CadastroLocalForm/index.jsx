@@ -43,13 +43,16 @@ function CadastroLocalForm() {
  const { caminhada, trilha, musculacao, natacao, surf } = atividades;
 
  const consultaCep = async () => {
-  const dadosCep = await useBuscaCep(getValues("cep"));
-  setValue("logradouro", dadosCep.logradouro);
-  setValue("municipio", dadosCep.localidade);
-  setValue("estado", dadosCep.uf);
-  const dadosLatLong = await useLatitudeLongitude(getValues("cep"));
-  setValue("latitude", dadosLatLong.lat);
-  setValue("longitude", dadosLatLong.lng);
+  let cepConsulta = getValues("cep").replace(/\D/g, "");
+  if (cepConsulta !== "") {
+   const dadosCep = await useBuscaCep(cepConsulta);
+   setValue("logradouro", dadosCep.logradouro);
+   setValue("municipio", dadosCep.localidade);
+   setValue("estado", dadosCep.uf);
+   const dadosLatLong = await useLatitudeLongitude(cepConsulta);
+   setValue("latitude", dadosLatLong.lat);
+   setValue("longitude", dadosLatLong.lng);
+  }
  };
 
  const getAtividadesSelecionadas = (event) => {
