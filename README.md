@@ -12,13 +12,16 @@ Encontrar locais adequados para exercícios ao ar livre pode ser desafiador, esp
 
 - _Front-end:_ React para uma interface de usuário interativa.
 - _APIs:_ ViaCep e Awesomeapi para consultas de Cep e localização.
+- _JSONServer_: Para simular o backend
 
 ## Como Executar
 
 1. Clone o repositório para sua máquina local.
-2. Instale as dependências com npm install.
-3. Inicie o servidor com npm run dev.
+2. Instale as dependências com: npm install.
+3. Inicie o servidor com: npm run dev.
 4. Acesse http://localhost:5173 em seu navegador.
+5. Se não tiver instalado o JSON Serve instale através do comando: npm install json-server
+6. Acesse via terminal a pasta public/data/ e inicie o JSON Server com: json-server --watch ./data/db.json
 
 ## Melhorias Futuras
 
