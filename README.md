@@ -21,7 +21,7 @@ Encontrar locais adequados para exercícios ao ar livre pode ser desafiador, esp
 3. Inicie o servidor com: npm run dev.
 4. Acesse http://localhost:5173 em seu navegador.
 5. Se não tiver instalado o JSON Serve instale através do comando: npm install json-server
-6. Acesse via terminal a pasta public/data/ e inicie o JSON Server com: json-server --watch ./data/db.json
+6. Acesse via terminal a pasta public/data/ e inicie o JSON Server com: json-server --watch db.json
 
 ## Melhorias Futuras
 
