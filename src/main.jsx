@@ -8,9 +8,9 @@ import { UsuariosContextProvider } from "./context/UsuarioContext";
 import { LocalContextProvider } from "./context/LocalContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
- <UsuariosContextProvider>
-  <LocalContextProvider>
-   <RouterProvider router={routers}></RouterProvider>
-  </LocalContextProvider>
- </UsuariosContextProvider>
+    <UsuariosContextProvider>
+        <LocalContextProvider>
+            <RouterProvider router={routers}></RouterProvider>
+        </LocalContextProvider>
+    </UsuariosContextProvider>
 );
