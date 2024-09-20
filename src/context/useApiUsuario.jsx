@@ -5,6 +5,7 @@ export const useApiUsuario = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [totalOnline, setTotalOnline] = useState(0);
+    const urlApi = import.meta.env.VITE_URL_API;
 
     useEffect(() => {
         getUsuarios();
@@ -12,7 +13,7 @@ export const useApiUsuario = () => {
 
     const getUsuarios = async () => {
         try {
-            const response = await fetch("http://localhost:3000/usuarios");
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -31,7 +32,7 @@ export const useApiUsuario = () => {
 
     const login = async (dadosUsuario) => {
         try {
-            const response = await fetch("http://localhost:3000/login", {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/login`, {
                 method: "POST",
                 body: JSON.stringify(dadosUsuario),
                 headers: {
@@ -74,8 +75,7 @@ export const useApiUsuario = () => {
         }
 
         try {
-            // const response = await fetch(`${import.meta.env.VITE_API_HOST}/usuarios`, {
-            const response = await fetch("http://localhost:3000/usuarios", {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios`, {
                 method: "POST",
                 body: JSON.stringify(usuarioAdicionar),
                 headers: {
@@ -105,8 +105,7 @@ export const useApiUsuario = () => {
         console.log(dadosUsuario);
         console.log(status);
         try {
-            // const response = await fetch(`${import.meta.env.VITE_API_HOST}/login/${id}`, {
-            const response = await fetch(`http://localhost:3000/login/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/login/${id}`, {
                 method: "PUT",
                 body: JSON.stringify(usuarioAtualizar),
                 headers: {
@@ -127,8 +126,7 @@ export const useApiUsuario = () => {
 
     const logout = async (emailUsuarioLogado) => {
         try {
-            // const response = await fetch(`${import.meta.env.VITE_API_HOST}/usuarios`);
-            const response = await fetch("http://localhost:3000/usuarios");
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios`);
 
             if (!response.ok) {
                 throw new Error(`Erro: ${response.status} - ${response.statusText}`);

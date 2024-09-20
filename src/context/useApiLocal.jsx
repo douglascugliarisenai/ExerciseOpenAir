@@ -13,8 +13,7 @@ export const useApiLocal = () => {
 
     const getLocais = async () => {
         try {
-            // const response = await fetch(`${import.meta.env.VITE_API_HOST}/locais`, {
-            const response = await fetch("http://localhost:3000/locais", {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/locais`, {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                 }
@@ -38,8 +37,8 @@ export const useApiLocal = () => {
 
     const sendToApi = async (formData) => {
         try {
-            // const response = await fetch(`${import.meta.env.VITE_API_HOST}/locais`, {
-            const response = await fetch("http://localhost:3000/locais", {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/locais`, {
+
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -62,8 +61,7 @@ export const useApiLocal = () => {
 
     const editarLocal = async (formData, id) => {
         try {
-            // const response = await fetch(`${import.meta.env.VITE_API_HOST}/locais/${id}`, {
-            const response = await fetch(`http://localhost:3000/locais/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/locais/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -85,8 +83,7 @@ export const useApiLocal = () => {
 
     const getLocalPorId = async (id) => {
         try {
-            // const response = await fetch(`${import.meta.env.VITE_API_HOST}/locais/${id}`);
-            const response = await fetch(`http://localhost:3000/locais/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/locais/${id}`, {
                 headers: {
                     "Authorization": `Bearer ${token}`,
                 }
@@ -101,8 +98,7 @@ export const useApiLocal = () => {
 
     const removerLocal = async (id) => {
         try {
-            // const response = await fetch(`${import.meta.env.VITE_API_HOST}/locais/${id}`, {
-            const response = await fetch(`http://localhost:3000/locais/${id}`, {
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/locais/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
