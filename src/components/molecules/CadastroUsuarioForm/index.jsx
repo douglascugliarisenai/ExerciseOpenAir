@@ -106,9 +106,9 @@ function CadastroUsuarioForm() {
                 placeholder="Data de Nascimento"
                 type="date"
                 variant="outlined"
-                error={!!errors.nascimento}
-                helperText={errors.nascimento?.message}
-                {...register("nascimento", {
+                error={!!errors.dataNascimento}
+                helperText={errors.dataNascimento?.message}
+                {...register("dataNascimento", {
                   required: "Este campo é obrigatório.",
                   maxLength: {
                     value: 10,
@@ -136,9 +136,9 @@ function CadastroUsuarioForm() {
                 type="password"
                 autoComplete="current-password"
                 placeholder="Senha"
-                error={!!errors.senha}
-                helperText={errors.senha?.message}
-                {...register("senha", {
+                error={!!errors.password}
+                helperText={errors.password?.message}
+                {...register("password", {
                   required: "Este campo é obrigatório.",
                   maxLength: {
                     value: 20,
@@ -151,12 +151,12 @@ function CadastroUsuarioForm() {
                 type="password"
                 autoComplete="current-password"
                 placeholder="Confirma Senha"
-                error={!!errors.confirmaSenha}
-                helperText={errors.confirmaSenha?.message}
-                {...register("confirmaSenha", {
-                  required: "Confirme a senha.",
+                error={!!errors.confirmaPassword}
+                helperText={errors.confirmaPassword?.message}
+                {...register("confirmaPassword", {
+                  required: "Confirme a Password.",
                   validate: (value) =>
-                    value === watch("senha") || "As senhas não coincidem"
+                    value === watch("password") || "As senhas não coincidem"
                 })}
               />
             </Grid>
