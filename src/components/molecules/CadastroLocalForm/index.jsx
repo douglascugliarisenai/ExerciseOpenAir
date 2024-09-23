@@ -26,7 +26,7 @@ function CadastroLocalForm() {
         formState: { errors }
     } = useForm();
 
-    const { sendToApi, editarLocal, getLocalPorId } = useApiLocal();
+    const { cadastrarLocal, editarLocal, getLocalPorId } = useApiLocal();
     const navigate = useNavigate();
 
     const { id } = useParams();
@@ -72,7 +72,7 @@ function CadastroLocalForm() {
                 id
             );
         } else {
-            sendToApi({
+            cadastrarLocal({
                 ...formValue,
                 usuario: localStorage.getItem("usuarioLogado"),
                 atividades: atividades
