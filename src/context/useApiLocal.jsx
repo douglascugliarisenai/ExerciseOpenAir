@@ -37,7 +37,7 @@ export const useApiLocal = () => {
     };
 
 
-    const sendToApi = async (formData) => {
+    const cadastrarLocal = async (formData) => {
         try {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/locais`, {
 
@@ -130,7 +130,7 @@ export const useApiLocal = () => {
         totalLocais,
         loading,
         error,
-        sendToApi,
+        cadastrarLocal,
         editarLocal,
         getLocalPorId,
         removerLocal

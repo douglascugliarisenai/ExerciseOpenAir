@@ -5,7 +5,7 @@ export const useApiUsuario = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [totalOnline, setTotalOnline] = useState(0);
-    const urlApi = import.meta.env.VITE_URL_API;
+
 
     useEffect(() => {
         getUsuarios();
@@ -13,17 +13,20 @@ export const useApiUsuario = () => {
 
     const getUsuarios = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios}`);
+            const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios`);
+
             if (!response.ok) {
                 const errorData = await response.json();
                 console.log(errorData.mensagem);
+                setError(errorData.mensagem);
                 return;
             }
+
             const data = await response.json();
             console.log(data);
             setUsuarios(data);
-            setTotalOnline(data.filter((usuario) => usuario.isOnline === true).length);
-            console.log("Total online:", totalOnline);
+            setTotalOnline(data.filter((usuario) => usuario.isOnline).length);
+            console.log("Total online:", data.filter((usuario) => usuario.isOnline).length);
         } catch (error) {
             console.error("Erro ao buscar usuários:", error);
             setError(error.message || "Erro desconhecido");
