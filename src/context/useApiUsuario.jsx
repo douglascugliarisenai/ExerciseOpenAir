@@ -15,7 +15,9 @@ export const useApiUsuario = () => {
         try {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios}`);
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorData = await response.json();
+                console.log(errorData.mensagem);
+                return;
             }
             const data = await response.json();
             console.log(data);
