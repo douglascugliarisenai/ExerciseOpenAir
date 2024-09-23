@@ -16,7 +16,7 @@ function LoginForm() {
     function sendLogin(formValue) {
         login({
             email: formValue.email,
-            password: formValue.senha
+            password: formValue.password
         });
     }
 
@@ -51,9 +51,9 @@ function LoginForm() {
                                 type="password"
                                 autoComplete="current-password"
                                 name="senha"
-                                error={!!errors.senha}
-                                helperText={errors.senha?.message}
-                                {...register("senha", {
+                                error={!!errors.password}
+                                helperText={errors.password?.message}
+                                {...register("password", {
                                     required: "Este campo é obrigatório.",
                                     maxLength: {
                                         value: 100,
