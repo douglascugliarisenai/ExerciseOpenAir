@@ -41,7 +41,8 @@ export const useApiUsuario = () => {
             });
 
             if (!response.ok) {
-                alert("Usuário ou senha inválidos!");
+                const errorData = await response.json();
+                alert(errorData.mensagem);
                 return;
             }
 
@@ -84,7 +85,9 @@ export const useApiUsuario = () => {
             });
 
             if (!response.ok) {
-                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                const errorData = await response.json();
+                alert(errorData.mensagem);
+                return;
             }
 
             alert("Usuário cadastrado com sucesso!");
@@ -101,9 +104,6 @@ export const useApiUsuario = () => {
             isOnline: status
         };
 
-        console.log(id);
-        console.log(dadosUsuario);
-        console.log(status);
         try {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/login/${id}`, {
                 method: "PUT",
@@ -114,7 +114,9 @@ export const useApiUsuario = () => {
             });
 
             if (!response.ok) {
-                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                const errorData = await response.json();
+                alert(errorData.mensagem);
+                return;
             }
 
             console.log("Usuário atualizado com sucesso!");
@@ -129,7 +131,9 @@ export const useApiUsuario = () => {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/usuarios`);
 
             if (!response.ok) {
-                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                const errorData = await response.json();
+                alert(errorData.mensagem);
+                return;
             }
 
             const dados = await response.json();

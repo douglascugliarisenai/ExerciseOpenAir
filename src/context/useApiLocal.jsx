@@ -9,7 +9,7 @@ export const useApiLocal = () => {
 
     useEffect(() => {
         getLocais();
-    }, []);
+    }, [getLocais]);
 
     const getLocais = async () => {
         try {
@@ -20,7 +20,9 @@ export const useApiLocal = () => {
             });
 
             if (!response.ok) {
-                throw new Error(`Erro: ${response.status} - ${response.statusText}`);
+                const errorData = await response.json();
+                alert(errorData.mensagem);
+                return;
             }
 
             const data = await response.json();
@@ -48,7 +50,9 @@ export const useApiLocal = () => {
             });
 
             if (!response.ok) {
-                throw new Error("Erro ao enviar dados para a API");
+                const errorData = await response.json();
+                alert(errorData.mensagem);
+                return;
             }
 
             setTotalLocais(totalLocais + 1);
@@ -71,7 +75,9 @@ export const useApiLocal = () => {
             });
 
             if (!response.ok) {
-                throw new Error("Erro ao enviar dados para a API");
+                const errorData = await response.json();
+                alert(errorData.mensagem);
+                return;
             }
 
             console.log("Dados enviados com sucesso para a API.");
@@ -106,7 +112,9 @@ export const useApiLocal = () => {
                 }
             });
             if (!response.ok) {
-                throw new Error("Erro ao enviar dados para a API");
+                const errorData = await response.json();
+                alert(errorData.mensagem);
+                return;
             }
 
             setTotalLocais(totalLocais - 1);
