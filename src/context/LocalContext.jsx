@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { createContext } from "react";
-import { useApiLocal } from "./useApiLocal";
+import { useApiLocal } from "../hooks/useApiLocal";
 
 export const LocalContext = createContext();
 export const LocalContextProvider = ({ children }) => {

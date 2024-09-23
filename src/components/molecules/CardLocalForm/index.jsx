@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import "./index.css";
 import { useState } from "react";
-import { useApiLocal } from "../../../context/useApiLocal";
+import { useApiLocal } from "../../../hooks/useApiLocal";
 import { useNavigate, useLocation } from "react-router-dom";
 import MapaForm from "../MapaForm";
 import { useEffect } from "react";

@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import "./index.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useApiLocal } from "../../../context/useApiLocal";
+import { useApiLocal } from "../../../hooks/useApiLocal";
 import useBuscaCep from "../../../hooks/useBuscaCep";
 import useLatitudeLongitude from "../../../hooks/useLatitudeLongitude";
 
