@@ -9,7 +9,7 @@ import {
 import { useForm } from "react-hook-form";
 import "./index.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useApiUsuario } from "../../../context/useApiUsuario";
+import { useApiUsuario } from "../../../hooks/useApiUsuario";
 import useBuscaCep from "../../../hooks/useBuscaCep";
 
 function CadastroUsuarioForm() {

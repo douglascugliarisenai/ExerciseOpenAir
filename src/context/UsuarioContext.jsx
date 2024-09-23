@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { createContext } from "react";
-import { useApiUsuario } from "../context/useApiUsuario";
+import { useApiUsuario } from "../hooks/useApiUsuario";
 
 export const UsuariosContext = createContext();
 export const UsuariosContextProvider = ({ children }) => {
