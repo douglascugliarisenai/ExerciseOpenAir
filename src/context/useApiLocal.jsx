@@ -9,7 +9,7 @@ export const useApiLocal = () => {
 
     useEffect(() => {
         getLocais();
-    }, [getLocais]);
+    }, []);
 
     const getLocais = async () => {
         try {
@@ -130,7 +130,7 @@ export const useApiLocal = () => {
         totalLocais,
         loading,
         error,
-        sendToApi: cadastrarLocal,
+        cadastrarLocal,
         editarLocal,
         getLocalPorId,
         removerLocal
