@@ -1,8 +1,8 @@
 import { Badge, Grid, Typography } from "@mui/material";
 import styles from "./DashboardPage.module.css";
 import CardLocalForm from "../../components/molecules/CardLocalForm";
-import { useApiLocal } from "../../context/useApiLocal";
-import { useApiUsuario } from "../../context/useApiUsuario";
+import { useApiLocal } from "../../hooks/useApiLocal";
+import { useApiUsuario } from "../../hooks/useApiUsuario";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import PeopleIcon from "@mui/icons-material/People";
 

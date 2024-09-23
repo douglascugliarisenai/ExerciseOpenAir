@@ -4,7 +4,7 @@ import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useApiUsuario } from "../../../context/useApiUsuario";
+import { useApiUsuario } from "../../../hooks/useApiUsuario";
 
 function ExerciseOpenAirHeader() {
     const [anchorEl, setAnchorEl] = useState(null);
