@@ -5,7 +5,7 @@ export const useApiUsuario = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [totalOnline, setTotalOnline] = useState(0);
-    const urlApi = import.meta.env.VITE_URL_API;
+
 
     useEffect(() => {
         getUsuarios();
