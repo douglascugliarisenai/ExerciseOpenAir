@@ -8,8 +8,13 @@ export const useApiLocal = () => {
     const token = localStorage.getItem("authToken");
 
     useEffect(() => {
-        getLocais();
-    }, []);
+        if (token) {
+            getLocais();
+        } else {
+            setError("Token não encontrado");
+            setLoading(false);
+        }
+    }, [token]);
 
     const getLocais = async () => {
         try {
@@ -36,11 +41,9 @@ export const useApiLocal = () => {
         }
     };
 
-
     const cadastrarLocal = async (formData) => {
         try {
             const response = await fetch(`${import.meta.env.VITE_URL_API}/locais`, {
-
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -56,9 +59,9 @@ export const useApiLocal = () => {
             }
 
             setTotalLocais(totalLocais + 1);
+            await getLocais();
             console.log("Dados enviados com sucesso para a API.");
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Erro ao enviar dados para a API:", error);
         }
     };
@@ -80,9 +83,9 @@ export const useApiLocal = () => {
                 return;
             }
 
+            await getLocais();
             console.log("Dados enviados com sucesso para a API.");
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Erro ao enviar dados para a API:", error);
         }
     };
@@ -96,8 +99,7 @@ export const useApiLocal = () => {
             });
             const data = await response.json();
             return data;
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Erro ao buscar dados da API:", error);
         }
     };
@@ -111,6 +113,7 @@ export const useApiLocal = () => {
                     "Authorization": `Bearer ${token}`,
                 }
             });
+
             if (!response.ok) {
                 const errorData = await response.json();
                 alert(errorData.mensagem);
@@ -118,18 +121,19 @@ export const useApiLocal = () => {
             }
 
             setTotalLocais(totalLocais - 1);
+            await getLocais();
             console.log("Dados enviados com sucesso para a API.");
-        }
-        catch (error) {
+        } catch (error) {
             console.error("Erro ao enviar dados para a API:", error);
         }
     };
 
     return {
         locais,
-        totalLocais,
         loading,
         error,
+        totalLocais,
+        getLocais,
         cadastrarLocal,
         editarLocal,
         getLocalPorId,
